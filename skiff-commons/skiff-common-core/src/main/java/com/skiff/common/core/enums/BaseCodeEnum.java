@@ -10,6 +10,8 @@ public enum BaseCodeEnum implements BaseEnum {
     PARAMETER_FAIL("10002", "参数校验未通过"),
     ACTUATOR_FAIL("10003", "执行异常"),
     EXCEPTION_FAIL("10004", "操作异常"),
+    SERIALIZATION_FAIL("10005", "序列化错误"),
+    DESERIALIZATION_FAIL("10006", "反序列化错误"),
     ;
 
     private final String code;

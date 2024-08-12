@@ -1,9 +1,11 @@
 package com.skiff.common.core.util;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.skiff.common.core.enums.JacksonEnum;
-import lombok.SneakyThrows;
+import com.skiff.common.core.enums.BaseCodeEnum;
+import com.skiff.common.core.exception.SkiffException;
+import com.skiff.common.core.json.JacksonEnum;
 
 import java.util.List;
 import java.util.Map;
@@ -14,25 +16,40 @@ public class JsonUtil {
         return JacksonEnum.INSTANCE.getInstance().getObjectMapper();
     }
 
-    @SneakyThrows
     public static <T> T toObject(String json, Class<T> clazz) {
-        return getObjectMapper().readValue(json, clazz);
+        try {
+            return getObjectMapper().readValue(json, clazz);
+        } catch (JsonProcessingException e) {
+            throw new SkiffException(BaseCodeEnum.DESERIALIZATION_FAIL, e);
+        }
     }
 
-    @SneakyThrows
+
     public static String toJson(Object obj) {
-        return getObjectMapper().writeValueAsString(obj);
+        ObjectMapper objectMapper = getObjectMapper();
+        try {
+            return objectMapper.writeValueAsString(obj);
+        } catch (JsonProcessingException e) {
+            throw new SkiffException(BaseCodeEnum.SERIALIZATION_FAIL, e);
+        }
     }
 
-    @SneakyThrows
+
     public static <T> List<T> toList(String json) {
-        return getObjectMapper().readValue(json, new TypeReference<>() {
-        });
+        try {
+            return getObjectMapper().readValue(json, new TypeReference<>() {
+            });
+        } catch (JsonProcessingException e) {
+            throw new SkiffException(BaseCodeEnum.DESERIALIZATION_FAIL, e);
+        }
     }
 
-    @SneakyThrows
     public static Map<String, Object> toMap(String json) {
-        return getObjectMapper().readValue(json, new TypeReference<>() {
-        });
+        try {
+            return getObjectMapper().readValue(json, new TypeReference<>() {
+            });
+        } catch (JsonProcessingException e) {
+            throw new SkiffException(BaseCodeEnum.DESERIALIZATION_FAIL, e);
+        }
     }
 }
