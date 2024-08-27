@@ -1,7 +1,7 @@
 package com.skiff.common.core.result;
 
-import com.skiff.common.core.enums.BaseCodeEnum;
-import com.skiff.common.core.enums.BaseEnum;
+import com.skiff.common.core.code.BaseCodeEnum;
+import com.skiff.common.core.code.Code;
 import lombok.Data;
 
 import java.beans.Transient;
@@ -38,10 +38,10 @@ public class BaseResult implements Serializable {
         this.message = message;
     }
 
-    public BaseResult(BaseEnum baseEnum) {
-        this.success = baseEnum.getCode().equals(BaseCodeEnum.SUCCESS.getCode());
-        this.message = baseEnum.getMessage();
-        this.code = baseEnum.getCode();
+    public BaseResult(Code code) {
+        this.success = code.getCode().equals(BaseCodeEnum.SUCCESS.getCode());
+        this.message = code.getMessage();
+        this.code = code.getCode();
     }
 
     @Transient

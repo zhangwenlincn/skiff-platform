@@ -1,6 +1,6 @@
-package com.skiff.common.core.enums;
+package com.skiff.common.core.code;
 
-public interface BaseEnum {
+public interface Code {
     /**
      * 获取错误码
      *

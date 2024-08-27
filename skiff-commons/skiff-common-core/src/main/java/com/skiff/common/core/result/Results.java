@@ -1,6 +1,6 @@
 package com.skiff.common.core.result;
 
-import com.skiff.common.core.enums.BaseEnum;
+import com.skiff.common.core.code.Code;
 import lombok.Data;
 
 import java.io.Serial;
@@ -31,19 +31,19 @@ public class Results implements Serializable {
 
     //----------------------------------------------------------------------------------
 
-    public static <CodeEnum extends BaseEnum> BaseResult baseResult(CodeEnum codeEnum) {
+    public static <CodeEnum extends Code> BaseResult baseResult(CodeEnum codeEnum) {
         return new BaseResult(codeEnum);
     }
 
-    public static <T, CodeEnum extends BaseEnum> ObjectResult<T> objectResult(CodeEnum codeEnum) {
+    public static <T, CodeEnum extends Code> ObjectResult<T> objectResult(CodeEnum codeEnum) {
         return new ObjectResult<>(codeEnum);
     }
 
-    public static <T, CodeEnum extends BaseEnum> ListResult<T> listResult(CodeEnum codeEnum) {
+    public static <T, CodeEnum extends Code> ListResult<T> listResult(CodeEnum codeEnum) {
         return new ListResult<>(codeEnum);
     }
 
-    public static <T, CodeEnum extends BaseEnum> PageResult<T> pageResult(CodeEnum codeEnum) {
+    public static <T, CodeEnum extends Code> PageResult<T> pageResult(CodeEnum codeEnum) {
         return new PageResult<>(codeEnum);
     }
     //----------------------------------------------------------------------------------

@@ -1,9 +1,9 @@
-package com.skiff.common.core.enums;
+package com.skiff.common.core.code;
 
 import lombok.Getter;
 
 @Getter
-public enum BaseCodeEnum implements BaseEnum {
+public enum BaseCodeEnum implements Code {
 
     SUCCESS("10000", "操作成功"),
     ERROR("10001", "操作失败"),

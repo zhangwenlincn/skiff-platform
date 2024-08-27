@@ -1,7 +1,7 @@
 package com.skiff.common.core.exception;
 
-import com.skiff.common.core.enums.BaseCodeEnum;
-import com.skiff.common.core.enums.BaseEnum;
+import com.skiff.common.core.code.BaseCodeEnum;
+import com.skiff.common.core.code.Code;
 import lombok.Getter;
 
 @Getter
@@ -14,13 +14,13 @@ public class SkiffException extends RuntimeException {
 
     private Throwable e;
 
-    public SkiffException(BaseEnum baseEnum) {
+    public SkiffException(Code baseEnum) {
         super(baseEnum.getMessage());
         this.code = baseEnum.getCode();
         this.message = baseEnum.getMessage();
     }
 
-    public SkiffException(BaseEnum baseEnum, Throwable e) {
+    public SkiffException(Code baseEnum, Throwable e) {
         super(baseEnum.getMessage(), e);
         this.code = baseEnum.getCode();
         this.message = baseEnum.getMessage();

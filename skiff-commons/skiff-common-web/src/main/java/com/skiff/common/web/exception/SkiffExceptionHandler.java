@@ -1,6 +1,6 @@
 package com.skiff.common.web.exception;
 
-import com.skiff.common.core.enums.BaseCodeEnum;
+import com.skiff.common.core.code.BaseCodeEnum;
 import com.skiff.common.core.exception.SkiffException;
 import com.skiff.common.core.result.BaseResult;
 import com.skiff.common.core.result.Results;

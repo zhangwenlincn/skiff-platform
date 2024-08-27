@@ -1,7 +1,7 @@
 package com.skiff.common.core.result;
 
-import com.skiff.common.core.enums.BaseCodeEnum;
-import com.skiff.common.core.enums.BaseEnum;
+import com.skiff.common.core.code.BaseCodeEnum;
+import com.skiff.common.core.code.Code;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -34,8 +34,8 @@ public class PageResult<T> extends BaseResult implements Serializable {
         super(success);
     }
 
-    public PageResult(BaseEnum baseEnum) {
-        super(baseEnum);
+    public PageResult(Code code) {
+        super(code);
     }
 
     public PageResult(Boolean success, String code, String message) {

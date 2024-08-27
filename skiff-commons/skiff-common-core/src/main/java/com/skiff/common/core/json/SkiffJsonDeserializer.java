@@ -3,7 +3,7 @@ package com.skiff.common.core.json;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.skiff.common.core.enums.BaseCodeEnum;
+import com.skiff.common.core.code.BaseCodeEnum;
 import com.skiff.common.core.exception.SkiffException;
 
 import java.io.IOException;
