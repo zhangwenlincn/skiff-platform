@@ -4,8 +4,8 @@ package com.skiff.common.message.register;
 import com.skiff.common.core.exception.SkiffException;
 import com.skiff.common.core.util.ClassUtil;
 import com.skiff.common.message.annotation.MessageActuator;
-import com.skiff.common.message.helper.MessageActuatorHelper;
 import com.skiff.common.message.core.Actuator;
+import com.skiff.common.message.helper.MessageActuatorHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

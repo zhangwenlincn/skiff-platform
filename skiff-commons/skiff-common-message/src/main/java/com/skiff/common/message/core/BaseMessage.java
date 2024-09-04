@@ -44,7 +44,7 @@ public class BaseMessage implements Message, Serializable {
     /**
      * 消息延迟时间(默认1秒)
      */
-    private Integer delay  = 1;
+    private Integer delay = 1;
 
     /**
      * 消息重试次数
