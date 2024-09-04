@@ -1,11 +1,11 @@
 package com.skiff.common.message.timer;
 
 import com.skiff.common.core.result.BaseResult;
-import com.skiff.common.message.annotation.MessageActuator;
 import com.skiff.common.message.annotation.MessageEntity;
 import com.skiff.common.message.helper.MessageActuatorHelper;
 import com.skiff.common.message.core.Actuator;
 import com.skiff.common.message.core.Message;
+import com.skiff.common.message.storage.MessageStorageService;
 import io.netty.util.Timeout;
 import io.netty.util.TimerTask;
 import org.slf4j.Logger;
@@ -16,14 +16,39 @@ public class MessageActuatorTimer implements TimerTask {
 
     private final Message message;
 
+    private MessageStorageService messageStorageService;
+
 
     public MessageActuatorTimer(Message message) {
         this.message = message;
     }
 
+    public MessageActuatorTimer(MessageStorageService messageStorageService, Message message) {
+        this.message = message;
+        this.messageStorageService = messageStorageService;
+    }
+
     @Override
     public void run(Timeout timeout) throws Exception {
-        if (message.getClass().isAnnotationPresent(MessageActuator.class)) {
+        //微服务 锁住消息，防止重复执行
+
+        if (messageStorageService == null) {
+            logger.debug("Message storage service not found");
+            actuate();
+        } else {
+            boolean lock = messageStorageService.tryLockMessage(message);
+            if (lock) {
+                actuate();
+            } else {
+                logger.debug("Message lock failed, message id: {}, message: {}", message.getId(), message);
+            }
+        }
+
+
+    }
+
+    private void actuate() {
+        if (message.getClass().isAnnotationPresent(MessageEntity.class)) {
             MessageEntity messageEntity = message.getClass().getAnnotation(MessageEntity.class);
             String messageEntityKey = messageEntity.group() + ":" + messageEntity.topic();
             Actuator actuator = MessageActuatorHelper.get(messageEntityKey);
