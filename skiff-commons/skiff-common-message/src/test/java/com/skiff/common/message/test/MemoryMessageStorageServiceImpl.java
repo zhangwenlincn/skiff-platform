@@ -38,4 +38,9 @@ public class MemoryMessageStorageServiceImpl implements MessageStorageService {
         locks.remove(key);
         executes.remove(key);
     }
+
+    @Override
+    public void errorMessage(Message message, String errorMessage) {
+
+    }
 }

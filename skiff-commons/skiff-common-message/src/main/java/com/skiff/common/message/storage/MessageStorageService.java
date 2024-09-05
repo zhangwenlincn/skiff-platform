@@ -41,4 +41,12 @@ public interface MessageStorageService {
      * @param key the key of the message to delete.
      */
     void deleteMessage(String key);
+
+    /**
+     * Log an error message.
+     *
+     * @param message      the error message to log.
+     * @param errorMessage the error message.
+     */
+    void errorMessage(Message message, String errorMessage);
 }

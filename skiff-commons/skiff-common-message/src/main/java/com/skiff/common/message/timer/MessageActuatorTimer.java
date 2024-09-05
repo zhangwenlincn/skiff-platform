@@ -30,25 +30,18 @@ public class MessageActuatorTimer implements TimerTask {
 
     @Override
     public void run(Timeout timeout) throws Exception {
-        if (messageStorageService == null) {
-            logger.debug("Message storage service not found");
-            actuate();
-        } else {
-            try {
-                boolean lock = messageStorageService.tryLockMessage(message);
-                if (lock) {
-                    actuate();
-                } else {
-                    logger.debug("Message lock failed, message id: {}, message: {}", message.getId(), message);
-                }
-            } catch (Exception e) {
-                logger.error("Message actuate failed, message id: {}, message: {}", message.getId(), message, e);
-            } finally {
-                messageStorageService.unlockMessage(message);
+        try {
+            boolean lock = messageStorageService.tryLockMessage(message);
+            if (lock) {
+                actuate();
+            } else {
+                logger.debug("Message lock failed, message id: {}, message: {}", message.getId(), message);
             }
+        } catch (Exception e) {
+            logger.error("Message actuate failed, message id: {}, message: {}", message.getId(), message, e);
+        } finally {
+            messageStorageService.unlockMessage(message);
         }
-
-
     }
 
     private void actuate() {
@@ -60,6 +53,8 @@ public class MessageActuatorTimer implements TimerTask {
             int retryCount = message.getRetryTimes();
             boolean success = false;
             BaseResult actuateResult = null;
+
+            String errorMessage = null;
             for (int i = 0; i < retryCount; i++) {
                 try {
                     actuateResult = actuator.actuate(message);
@@ -67,14 +62,17 @@ public class MessageActuatorTimer implements TimerTask {
                         success = true;
                         break;
                     }
+                    errorMessage = actuateResult.getMessage();
                     logger.error("Message actuator failed, retry count: {}, MessageEntity:{} message id: {}, message: {}, error: {}", i + 1, messageEntityKey, message.getId(), message, actuateResult.getMessage());
                 } catch (Exception e) {
+                    errorMessage = e.getMessage();
                     logger.error("Message actuator failed with exception, retry count: {}, MessageEntity:{} message id: {}, message: {}", i + 1, messageEntityKey, message.getId(), message, e);
                 }
             }
             if (success) {
                 logger.debug("Message actuator success, MessageEntity:{} message id: {}, message: {}", messageEntityKey, message.getId(), message);
             } else {
+                messageStorageService.errorMessage(message, errorMessage);
                 logger.error("Message actuator failed after retries, MessageEntity:{} message id: {}, message: {}, error: {}", messageEntityKey, message.getId(), message, actuateResult != null ? actuateResult.getMessage() : "Unknown error");
             }
         } else {
