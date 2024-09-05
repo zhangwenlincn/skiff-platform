@@ -30,17 +30,21 @@ public class MessageActuatorTimer implements TimerTask {
 
     @Override
     public void run(Timeout timeout) throws Exception {
-        //微服务 锁住消息，防止重复执行
-
         if (messageStorageService == null) {
             logger.debug("Message storage service not found");
             actuate();
         } else {
-            boolean lock = messageStorageService.tryLockMessage(message);
-            if (lock) {
-                actuate();
-            } else {
-                logger.debug("Message lock failed, message id: {}, message: {}", message.getId(), message);
+            try {
+                boolean lock = messageStorageService.tryLockMessage(message);
+                if (lock) {
+                    actuate();
+                } else {
+                    logger.debug("Message lock failed, message id: {}, message: {}", message.getId(), message);
+                }
+            } catch (Exception e) {
+                logger.error("Message actuate failed, message id: {}, message: {}", message.getId(), message, e);
+            } finally {
+                messageStorageService.unlockMessage(message);
             }
         }
 
@@ -48,26 +52,21 @@ public class MessageActuatorTimer implements TimerTask {
     }
 
     private void actuate() {
-        try {
-            if (message.getClass().isAnnotationPresent(MessageEntity.class)) {
-                MessageEntity messageEntity = message.getClass().getAnnotation(MessageEntity.class);
-                String messageEntityKey = messageEntity.group() + ":" + messageEntity.topic();
-                Actuator actuator = MessageActuatorHelper.get(messageEntityKey);
-                BaseResult actuateResult = actuator.actuate(message);
-                if (actuateResult.isSuccess()) {
-                    logger.debug("Message actuator success, MessageEntity:{} message id: {}, message: {}", messageEntityKey, message.getId(), message);
-                } else {
-                    logger.error("Message actuator failed, MessageEntity:{} message id: {}, message: {}, error: {}", messageEntityKey, message.getId(), message, actuateResult.getMessage());
-                }
-
+        if (message.getClass().isAnnotationPresent(MessageEntity.class)) {
+            MessageEntity messageEntity = message.getClass().getAnnotation(MessageEntity.class);
+            String messageEntityKey = messageEntity.group() + ":" + messageEntity.topic();
+            Actuator actuator = MessageActuatorHelper.get(messageEntityKey);
+            BaseResult actuateResult = actuator.actuate(message);
+            if (actuateResult.isSuccess()) {
+                logger.debug("Message actuator success, MessageEntity:{} message id: {}, message: {}", messageEntityKey, message.getId(), message);
             } else {
-                logger.error("Message actuator not found, message id: {}, message: {}", message.getId(), message);
+                logger.error("Message actuator failed, MessageEntity:{} message id: {}, message: {}, error: {}", messageEntityKey, message.getId(), message, actuateResult.getMessage());
             }
-        } catch (Exception e) {
-            logger.error("Message actuator failed, message id: {}, message: {}, error: ", message.getId(), message, e);
-        } finally {
-            messageStorageService.deleteMessage(message.getId());
+
+        } else {
+            logger.error("Message actuator not found, message id: {}, message: {}", message.getId(), message);
         }
+
 
     }
 }

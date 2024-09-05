@@ -16,6 +16,11 @@ public interface MessageStorageService {
     boolean tryLockMessage(Message message);
 
     /**
+     * Unlock a message in the storage.
+     */
+    void unlockMessage(Message message);
+
+    /**
      * Get all messages from the storage.
      *
      * @return a list of all messages in the storage.
