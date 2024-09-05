@@ -20,7 +20,7 @@ public class MessageTest {
             OrderMessage orderMessage = new OrderMessage();
             orderMessage.setId("message id = " + i);
             orderMessage.setMessage("order message");
-            orderMessage.setOrderId("order id  = " + i);
+            orderMessage.setOrderId(i + "");
             orderMessage.setDelay(i);
             messageStorageService.saveMessage(orderMessage);
         }

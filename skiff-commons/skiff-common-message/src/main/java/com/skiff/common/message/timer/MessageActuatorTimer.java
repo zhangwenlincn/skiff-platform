@@ -56,17 +56,30 @@ public class MessageActuatorTimer implements TimerTask {
             MessageEntity messageEntity = message.getClass().getAnnotation(MessageEntity.class);
             String messageEntityKey = messageEntity.group() + ":" + messageEntity.topic();
             Actuator actuator = MessageActuatorHelper.get(messageEntityKey);
-            BaseResult actuateResult = actuator.actuate(message);
-            if (actuateResult.isSuccess()) {
+
+            int retryCount = message.getRetryTimes();
+            boolean success = false;
+            BaseResult actuateResult = null;
+            for (int i = 0; i < retryCount; i++) {
+                try {
+                    actuateResult = actuator.actuate(message);
+                    if (actuateResult.isSuccess()) {
+                        success = true;
+                        break;
+                    }
+                    logger.error("Message actuator failed, retry count: {}, MessageEntity:{} message id: {}, message: {}, error: {}", i + 1, messageEntityKey, message.getId(), message, actuateResult.getMessage());
+                } catch (Exception e) {
+                    logger.error("Message actuator failed with exception, retry count: {}, MessageEntity:{} message id: {}, message: {}", i + 1, messageEntityKey, message.getId(), message, e);
+                }
+            }
+            if (success) {
                 logger.debug("Message actuator success, MessageEntity:{} message id: {}, message: {}", messageEntityKey, message.getId(), message);
             } else {
-                logger.error("Message actuator failed, MessageEntity:{} message id: {}, message: {}, error: {}", messageEntityKey, message.getId(), message, actuateResult.getMessage());
+                logger.error("Message actuator failed after retries, MessageEntity:{} message id: {}, message: {}, error: {}", messageEntityKey, message.getId(), message, actuateResult != null ? actuateResult.getMessage() : "Unknown error");
             }
-
         } else {
             logger.error("Message actuator not found, message id: {}, message: {}", message.getId(), message);
         }
-
-
     }
+
 }

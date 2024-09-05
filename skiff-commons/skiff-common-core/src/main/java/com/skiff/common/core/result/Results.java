@@ -1,5 +1,6 @@
 package com.skiff.common.core.result;
 
+import com.skiff.common.core.code.BaseCodeEnum;
 import com.skiff.common.core.code.Code;
 import lombok.Data;
 
@@ -52,16 +53,32 @@ public class Results implements Serializable {
         return new BaseResult(false, code, message);
     }
 
+    public static BaseResult baseResult(String message) {
+        return new BaseResult(false, BaseCodeEnum.ERROR.getCode(), message);
+    }
+
     public static <T> ObjectResult<T> objectResult(String code, String message) {
         return new ObjectResult<>(false, code, message);
+    }
+
+    public static <T> ObjectResult<T> objectResult(String message) {
+        return new ObjectResult<>(false, BaseCodeEnum.ERROR.getCode(), message);
     }
 
     public static <T> ListResult<T> listResult(String code, String message) {
         return new ListResult<>(false, code, message);
     }
 
+    public static <T> ListResult<T> listResult(String message) {
+        return new ListResult<>(false, BaseCodeEnum.ERROR.getCode(), message);
+    }
+
     public static <T> PageResult<T> pageResult(String code, String message) {
         return new PageResult<>(false, code, message);
+    }
+
+    public static <T> PageResult<T> pageResult(String message) {
+        return new PageResult<>(false, BaseCodeEnum.ERROR.getCode(), message);
     }
 
     //----------------------------------------------------------------------------------
