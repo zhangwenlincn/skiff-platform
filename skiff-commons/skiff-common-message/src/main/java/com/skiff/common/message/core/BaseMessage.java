@@ -18,18 +18,16 @@ public class BaseMessage implements Message, Serializable {
      */
     private static Long NOW_TIME_MILLIS;
 
+    public BaseMessage() {
+        NOW_TIME_MILLIS = System.currentTimeMillis();
+    }
+
 
     /**
      * 默认重试次数
      */
     private static final Integer DEFAULT_RETRY_TIMES = 3;
 
-    /**
-     * 构造方法
-     */
-    public BaseMessage() {
-        NOW_TIME_MILLIS = System.currentTimeMillis();
-    }
 
     /**
      * 消息ID

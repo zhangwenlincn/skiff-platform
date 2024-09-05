@@ -48,18 +48,26 @@ public class MessageActuatorTimer implements TimerTask {
     }
 
     private void actuate() {
-        if (message.getClass().isAnnotationPresent(MessageEntity.class)) {
-            MessageEntity messageEntity = message.getClass().getAnnotation(MessageEntity.class);
-            String messageEntityKey = messageEntity.group() + ":" + messageEntity.topic();
-            Actuator actuator = MessageActuatorHelper.get(messageEntityKey);
-            BaseResult actuateResult = actuator.actuate(message);
-            if (actuateResult.isSuccess()) {
-                logger.debug("Message actuator success, MessageEntity:{} message id: {}, message: {}", messageEntityKey, message.getId(), message);
+        try {
+            if (message.getClass().isAnnotationPresent(MessageEntity.class)) {
+                MessageEntity messageEntity = message.getClass().getAnnotation(MessageEntity.class);
+                String messageEntityKey = messageEntity.group() + ":" + messageEntity.topic();
+                Actuator actuator = MessageActuatorHelper.get(messageEntityKey);
+                BaseResult actuateResult = actuator.actuate(message);
+                if (actuateResult.isSuccess()) {
+                    logger.debug("Message actuator success, MessageEntity:{} message id: {}, message: {}", messageEntityKey, message.getId(), message);
+                } else {
+                    logger.error("Message actuator failed, MessageEntity:{} message id: {}, message: {}, error: {}", messageEntityKey, message.getId(), message, actuateResult.getMessage());
+                }
+
             } else {
-                logger.error("Message actuator failed, MessageEntity:{} message id: {}, message: {}, error: {}", messageEntityKey, message.getId(), message, actuateResult.getMessage());
+                logger.error("Message actuator not found, message id: {}, message: {}", message.getId(), message);
             }
-        } else {
-            logger.error("Message actuator not found, message id: {}, message: {}", message.getId(), message);
+        } catch (Exception e) {
+            logger.error("Message actuator failed, message id: {}, message: {}, error: ", message.getId(), message, e);
+        } finally {
+            messageStorageService.deleteMessage(message.getId());
         }
+
     }
 }

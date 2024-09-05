@@ -1,6 +1,7 @@
 package com.skiff.common.message.timer;
 
 import com.skiff.common.message.core.Message;
+import com.skiff.common.message.core.MessageTimeout;
 import com.skiff.common.message.helper.MessageTimeoutHelper;
 import com.skiff.common.message.storage.MessageStorageService;
 import io.netty.util.HashedWheelTimer;
@@ -29,14 +30,14 @@ public class DefaultMessageActuatorTask implements MessageActuatorTask {
     public void manual(Message message) {
         Timeout timeout = run.newTimeout(new MessageActuatorTimer(message), message.getExecuteTimestamp() - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
         timeout.task();
-        MessageTimeoutHelper.add(message.getId(), timeout);
+        MessageTimeoutHelper.add(message.getId(), new MessageTimeout(message.getExecuteTimestamp(), timeout));
     }
 
     @Override
     public void automatic(Message message) {
         Timeout timeout = run.newTimeout(new MessageActuatorTimer(messageStorageService, message), message.getExecuteTimestamp() - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
         timeout.task();
-        MessageTimeoutHelper.add(message.getId(), timeout);
+        MessageTimeoutHelper.add(message.getId(), new MessageTimeout(message.getExecuteTimestamp(), timeout));
     }
 
     @Override
@@ -50,11 +51,12 @@ public class DefaultMessageActuatorTask implements MessageActuatorTask {
                             automatic(message);
                         }
                     });
-                    TimeUnit.MILLISECONDS.sleep(1);
+                    TimeUnit.MILLISECONDS.sleep(10);
                 } catch (Exception e) {
                     logger.error("DefaultMessageActuatorTask schedule error", e);
                 }
             }
         }).start();
     }
+
 }
