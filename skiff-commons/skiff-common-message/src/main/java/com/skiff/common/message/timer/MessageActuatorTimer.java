@@ -41,6 +41,7 @@ public class MessageActuatorTimer implements TimerTask {
             logger.error("Message actuate failed, message id: {}, message: {}", message.getId(), message, e);
         } finally {
             messageStorageService.unlockMessage(message);
+            messageStorageService.deleteMessage(message.getId());
         }
     }
 
@@ -73,6 +74,7 @@ public class MessageActuatorTimer implements TimerTask {
                 logger.debug("Message actuator success, MessageEntity:{} message id: {}, message: {}", messageEntityKey, message.getId(), message);
             } else {
                 messageStorageService.errorMessage(message, errorMessage);
+
                 logger.error("Message actuator failed after retries, MessageEntity:{} message id: {}, message: {}, error: {}", messageEntityKey, message.getId(), message, actuateResult != null ? actuateResult.getMessage() : "Unknown error");
             }
         } else {

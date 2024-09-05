@@ -46,14 +46,14 @@ public class DefaultMessageActuatorTask implements MessageActuatorTask {
     public void manual(Message message) {
         Timeout timeout = run.newTimeout(new MessageActuatorTimer(message), message.getExecuteTimestamp() - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
         timeout.task();
-        MessageTimeoutHelper.add(message.getId(), new MessageTimeout(message.getExecuteTimestamp(), timeout));
+        MessageTimeoutHelper.add(message.getId(), new MessageTimeout(message.getExecuteTimestamp() + 10 * 1000, timeout));
     }
 
     @Override
     public void automatic(Message message) {
         Timeout timeout = run.newTimeout(new MessageActuatorTimer(messageStorageService, message), message.getExecuteTimestamp() - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
         timeout.task();
-        MessageTimeoutHelper.add(message.getId(), new MessageTimeout(message.getExecuteTimestamp(), timeout));
+        MessageTimeoutHelper.add(message.getId(), new MessageTimeout(message.getExecuteTimestamp() + 10 * 1000, timeout));
     }
 
     @Override

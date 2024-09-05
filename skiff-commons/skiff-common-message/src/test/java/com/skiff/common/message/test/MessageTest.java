@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 public class MessageTest {
 
-    //@Test
+    @Test
     public void t1() {
         MessageStorageService messageStorageService = new MemoryMessageStorageServiceImpl();
         new DefaultMessageActuatorTask(messageStorageService).schedule();

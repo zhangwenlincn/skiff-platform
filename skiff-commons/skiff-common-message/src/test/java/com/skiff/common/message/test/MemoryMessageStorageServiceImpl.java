@@ -2,12 +2,15 @@ package com.skiff.common.message.test;
 
 import com.skiff.common.message.core.Message;
 import com.skiff.common.message.storage.MessageStorageService;
+import org.slf4j.Logger;
 
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 public class MemoryMessageStorageServiceImpl implements MessageStorageService {
+
+    private static final Logger loger = org.slf4j.LoggerFactory.getLogger(MemoryMessageStorageServiceImpl.class);
 
     private static final ConcurrentMap<String, Message> executes = new ConcurrentHashMap<>();
     private static final ConcurrentMap<String, Message> locks = new ConcurrentHashMap<>();
@@ -41,6 +44,6 @@ public class MemoryMessageStorageServiceImpl implements MessageStorageService {
 
     @Override
     public void errorMessage(Message message, String errorMessage) {
-
+        loger.debug("Error message: key {} error message {}", message.getId(), errorMessage);
     }
 }
