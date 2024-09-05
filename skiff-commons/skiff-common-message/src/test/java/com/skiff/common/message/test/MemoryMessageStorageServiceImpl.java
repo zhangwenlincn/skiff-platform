@@ -19,6 +19,11 @@ public class MemoryMessageStorageServiceImpl implements MessageStorageService {
     }
 
     @Override
+    public void unlockMessage(Message message) {
+        locks.remove(message.getId());
+    }
+
+    @Override
     public List<Message> getMessages() {
         return executes.values().stream().toList();
     }

@@ -21,9 +21,25 @@ public class DefaultMessageActuatorTask implements MessageActuatorTask {
 
     private final MessageStorageService messageStorageService;
 
+    // scan message interval, default interval is 100ms
+    private Long interval = 100L;
+
+
     public DefaultMessageActuatorTask(MessageStorageService messageStorageService) {
         this.messageStorageService = messageStorageService;
         this.run = new HashedWheelTimer(new DefaultThreadFactory("skiff-message-task-run"), 100, TimeUnit.MILLISECONDS);
+    }
+
+    public DefaultMessageActuatorTask(MessageStorageService messageStorageService, Long interval) {
+        this.messageStorageService = messageStorageService;
+        this.run = new HashedWheelTimer(new DefaultThreadFactory("skiff-message-task-run"), 100, TimeUnit.MILLISECONDS);
+        this.interval = interval;
+    }
+
+    public DefaultMessageActuatorTask(MessageStorageService messageStorageService, Long interval, Long tickDuration) {
+        this.messageStorageService = messageStorageService;
+        this.run = new HashedWheelTimer(new DefaultThreadFactory("skiff-message-task-run"), tickDuration, TimeUnit.MILLISECONDS);
+        this.interval = interval;
     }
 
     @Override
@@ -51,7 +67,7 @@ public class DefaultMessageActuatorTask implements MessageActuatorTask {
                             automatic(message);
                         }
                     });
-                    TimeUnit.MILLISECONDS.sleep(10);
+                    TimeUnit.MILLISECONDS.sleep(interval);
                 } catch (Exception e) {
                     logger.error("DefaultMessageActuatorTask schedule error", e);
                 }
