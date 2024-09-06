@@ -10,6 +10,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>skiff-commons</module>
+        <module>skiff-starters</module>
+        <module>skiff-apps</module>
     </modules>
 
     <properties>
@@ -110,6 +112,17 @@
             <dependency>
                 <groupId>com.skiff.common.web</groupId>
                 <artifactId>skiff-common-web</artifactId>
+                <version>${skiff-platform.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.skiff.common.message</groupId>
+                <artifactId>skiff-common-message</artifactId>
+                <version>${skiff-platform.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.skiff.starter.message</groupId>
+                <artifactId>skiff-message-spring-boot-starter</artifactId>
                 <version>${skiff-platform.version}</version>
             </dependency>
         </dependencies>
