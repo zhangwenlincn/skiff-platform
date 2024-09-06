@@ -15,7 +15,7 @@
     </modules>
 
     <properties>
-        <skiff-platform.version>1.0-SNAPSHOT</skiff-platform.version>
+        <skiff-platform.version>1.0</skiff-platform.version>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <mavem.compiler.plugin.version>3.13.0</mavem.compiler.plugin.version>
