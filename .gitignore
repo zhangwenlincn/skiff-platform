@@ -45,3 +45,5 @@ build/
 /.idea/inspectionProfiles/Project_Default.xml
 /.idea/uiDesigner.xml
 /.idea/vcs.xml
+/logs/
+/.idea/
