@@ -61,9 +61,9 @@ public class Results implements Serializable {
         return new ObjectResult<>(false, code, message);
     }
 
-    public static <T> ObjectResult<T> objectResult(String message) {
-        return new ObjectResult<>(false, BaseCodeEnum.ERROR.getCode(), message);
-    }
+    //public static <T> ObjectResult<T> objectResult(String message) {
+    //    return new ObjectResult<>(false, BaseCodeEnum.ERROR.getCode(), message);
+    //}
 
     public static <T> ListResult<T> listResult(String code, String message) {
         return new ListResult<>(false, code, message);
