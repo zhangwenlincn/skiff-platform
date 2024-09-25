@@ -13,10 +13,19 @@ public class BaseResult implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
+    /**
+     * 是否成功
+     */
     private Boolean success = false;
 
+    /**
+     * 错误码 (正确码 10000)
+     */
     private String code = BaseCodeEnum.ERROR.getCode();
 
+    /**
+     * 错误信息
+     */
     private String message = BaseCodeEnum.ERROR.getMessage();
 
     public BaseResult() {

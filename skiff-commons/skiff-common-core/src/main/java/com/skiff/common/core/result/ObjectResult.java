@@ -15,6 +15,9 @@ public class ObjectResult<T> extends BaseResult implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
+    /**
+     * 业务数据
+     */
     private T data;
 
     public ObjectResult() {

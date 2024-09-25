@@ -15,6 +15,9 @@ import java.util.Optional;
 public class ListResult<T> extends BaseResult implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
+    /**
+     * 列表数据
+     */
     private List<T> list;
 
     public ListResult() {
