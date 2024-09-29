@@ -4,6 +4,8 @@ import com.skiff.common.core.result.BaseResult;
 import com.skiff.common.core.result.Results;
 import com.skiff.common.message.storage.MessageStorageService;
 import jakarta.annotation.Resource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/message")
 public class MessageController {
+
+    private static final Logger logger = LoggerFactory.getLogger(MessageController.class);
 
     @Resource
     private MessageStorageService messageStorageService;
@@ -26,6 +30,7 @@ public class MessageController {
      */
     @RequestMapping("/m1")
     public BaseResult m1(@RequestParam(value = "cnt") Integer cnt) {
+        logger.info("模拟订单消息，订单数量：{}", cnt);
         for (int i = 1; i < (cnt + 1); i++) {
             OrderMessage orderMessage = new OrderMessage();
             orderMessage.setId("message id = " + i);

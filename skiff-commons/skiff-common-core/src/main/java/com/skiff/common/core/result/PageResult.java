@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class PageResult<T> extends BaseResult implements Serializable {
+public class PageResult<T> extends BaseResult implements Result<List<T>>, Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -25,7 +25,7 @@ public class PageResult<T> extends BaseResult implements Serializable {
     /**
      * 页码对应数据
      */
-    private List<T> list;
+    private List<T> data;
 
     public PageResult() {
     }
@@ -45,7 +45,7 @@ public class PageResult<T> extends BaseResult implements Serializable {
     public PageResult(Pager pager, List<T> list) {
         super(Optional.ofNullable(list).map(e -> BaseCodeEnum.SUCCESS).orElse(BaseCodeEnum.ERROR));
         this.page = pager;
-        this.list = list;
+        this.data = list;
     }
 
 

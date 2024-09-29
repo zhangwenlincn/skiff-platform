@@ -12,6 +12,9 @@ public enum BaseCodeEnum implements Code {
     EXCEPTION_FAIL("10004", "操作异常"),
     SERIALIZATION_FAIL("10005", "序列化错误"),
     DESERIALIZATION_FAIL("10006", "反序列化错误"),
+    URI_PATH_NOT_FOUND("10007", "URI路径不存在"),
+    REQUEST_METHOD_NOT_SUPPORTED("10008", "%s method not supported, only support [%s]"),
+    MESSAGE_NOT_READABLE("10009", "required request body is missing"),
     ;
 
     private final String code;

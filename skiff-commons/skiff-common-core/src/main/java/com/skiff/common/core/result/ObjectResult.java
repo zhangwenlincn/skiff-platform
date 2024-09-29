@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class ObjectResult<T> extends BaseResult implements Serializable {
+public class ObjectResult<T> extends BaseResult implements Result<T>, Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 

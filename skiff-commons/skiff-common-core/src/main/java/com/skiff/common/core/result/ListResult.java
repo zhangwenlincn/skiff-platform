@@ -12,13 +12,13 @@ import java.util.Optional;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class ListResult<T> extends BaseResult implements Serializable {
+public class ListResult<T> extends BaseResult implements Result<List<T>>, Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
     /**
      * 列表数据
      */
-    private List<T> list;
+    private List<T> data;
 
     public ListResult() {
     }
@@ -33,7 +33,7 @@ public class ListResult<T> extends BaseResult implements Serializable {
 
     public ListResult(List<T> list) {
         super(Optional.ofNullable(list).map(e -> BaseCodeEnum.SUCCESS).orElse(BaseCodeEnum.ERROR));
-        this.list = list;
+        this.data = list;
     }
 
     public ListResult(boolean success, String code, String message) {
