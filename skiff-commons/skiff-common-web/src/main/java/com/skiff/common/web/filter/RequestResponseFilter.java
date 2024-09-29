@@ -13,9 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
@@ -29,13 +27,12 @@ public class RequestResponseFilter implements Filter {
         log.info("Request remote address: {}", httpServletRequest.getRemoteAddr());
         log.info("Request parameters: {}", JsonUtil.toJson(httpServletRequest.getParameterMap()));
         SkiffHttpServletRequestWrapper requestWrapper = new SkiffHttpServletRequestWrapper(httpServletRequest);
-        String requestBody = readRequestBody(requestWrapper);
-        log.info("Request body: {}", requestBody);
+        log.info("Request body: {}", requestWrapper.getBody());
         //模拟填充参数
         //requestWrapper.addParameter("cnt", "222");
         //模拟重新设置body
         //String body = "{\"name\":\"中文\",\"age\":18}";
-        requestWrapper.setBody(requestBody);
+        //requestWrapper.setBody(body);
 
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
         SkiffHttpServletResponseWrapper skiffHttpServletResponseWrapper = new SkiffHttpServletResponseWrapper(httpServletResponse);
@@ -46,16 +43,5 @@ public class RequestResponseFilter implements Filter {
         log.info("Response status: {}, skiff code: {}, success: {}, message: {}", httpServletResponse.getStatus(), result.get("code"), result.get("success"), result.get("message"));
         //拿到responseBody，然后再次封装成Result对象，并设置到responseWrapper中
         response.getOutputStream().write(responseBody);
-    }
-
-    private String readRequestBody(SkiffHttpServletRequestWrapper request) throws IOException {
-        StringBuilder stringBuilder = new StringBuilder();
-        String line;
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(request.getInputStream()))) {
-            while ((line = reader.readLine()) != null) {
-                stringBuilder.append(line);
-            }
-        }
-        return stringBuilder.toString();
     }
 }
