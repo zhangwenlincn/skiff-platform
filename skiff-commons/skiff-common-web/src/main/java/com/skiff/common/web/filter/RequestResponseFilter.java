@@ -1,5 +1,6 @@
 package com.skiff.common.web.filter;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.skiff.common.core.util.JsonUtil;
 import com.skiff.common.web.wrapper.SkiffHttpServletRequestWrapper;
 import com.skiff.common.web.wrapper.SkiffHttpServletResponseWrapper;
@@ -15,7 +16,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.Map;
 
 public class RequestResponseFilter implements Filter {
     private static final Logger log = LoggerFactory.getLogger(RequestResponseFilter.class);
@@ -38,10 +38,13 @@ public class RequestResponseFilter implements Filter {
         SkiffHttpServletResponseWrapper skiffHttpServletResponseWrapper = new SkiffHttpServletResponseWrapper(httpServletResponse);
         // 继续过滤器链
         chain.doFilter(requestWrapper, skiffHttpServletResponseWrapper);
-        byte[] responseBody = skiffHttpServletResponseWrapper.getCopyOfResponseBody();
-        Map<String, Object> result = JsonUtil.toMap(new String(responseBody, StandardCharsets.UTF_8));
-        log.info("Response status: {}, skiff code: {}, success: {}, message: {}", httpServletResponse.getStatus(), result.get("code"), result.get("success"), result.get("message"));
-        //拿到responseBody，然后再次封装成Result对象，并设置到responseWrapper中
-        response.getOutputStream().write(responseBody);
+        log.info("Response status: {}", httpServletResponse.getStatus());
+        if (httpServletResponse.getStatus() == HttpServletResponse.SC_OK && httpServletResponse.getContentType().contains("application/json")) {
+            byte[] responseBody = skiffHttpServletResponseWrapper.getCopyOfResponseBody();
+            JsonNode jsonNode = JsonUtil.getObjectMapper().readTree(new String(responseBody, StandardCharsets.UTF_8));
+            log.info("skiff code: {}, success: {}, message: {}", jsonNode.get("code"), jsonNode.get("success"), jsonNode.get("message"));
+            //拿到responseBody，然后再次封装成Result对象，并设置到responseWrapper中
+            response.getOutputStream().write(responseBody);
+        }
     }
 }
