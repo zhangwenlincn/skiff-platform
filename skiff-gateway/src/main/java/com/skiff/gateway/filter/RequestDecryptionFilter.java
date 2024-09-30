@@ -59,7 +59,7 @@ public class RequestDecryptionFilter implements GlobalFilter {
         URI uri = originalRequestUrls.getFirst();
         log.debug("Original gateway request url: {}", uri);
         String path = uri.getPath();
-        if (!decryptionEncryptionProperties.getDecryption().contains(path)) {
+        if (!decryptionEncryptionProperties.getRequest().getUrls().contains(path)) {
             log.debug("Request path {} is not in decryption list, skip filter", path);
             return chain.filter(exchange);
         }

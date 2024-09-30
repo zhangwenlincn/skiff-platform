@@ -29,12 +29,15 @@ spring:
           filters:
             - StripPrefix=2
 skiff:
-  cloud:
-    gateway:
-      decryption:
+  gateway:
+    request:
+      enabled: true
+      urls:
         - /api/test/result/getResultRequest
-      encryption:
-        - /api/test/**
+    response:
+      enabled: true
+      urls:
+        - /api/test/result/getResultRequest
 logging:
   level:
     com.skiff: debug

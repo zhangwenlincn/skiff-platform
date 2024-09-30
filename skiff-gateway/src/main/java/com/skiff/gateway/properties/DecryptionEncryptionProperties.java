@@ -7,17 +7,31 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import java.util.List;
 
 @Data
-@ConfigurationProperties(prefix = "skiff.cloud.gateway")
+@ConfigurationProperties(prefix = "skiff.gateway")
 public class DecryptionEncryptionProperties {
 
 
     /**
      * Decryption keys.
      */
-    private List<String> decryption;
+    private RequestDecryption request;
 
     /**
      * Encryption keys.
      */
-    private List<String> encryption;
+    private ResponseEncryption response;
+
+
+    @Data
+    public static class RequestDecryption {
+        private boolean enabled;
+        private List<String> urls;
+    }
+
+    @Data
+    public static class ResponseEncryption {
+        private boolean enabled;
+        private List<String> urls;
+    }
+
 }
