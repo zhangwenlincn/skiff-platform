@@ -12,6 +12,7 @@
         <module>skiff-commons</module>
         <module>skiff-starters</module>
         <module>skiff-apps</module>
+        <module>skiff-gateway</module>
     </modules>
 
     <properties>

@@ -1,0 +1,40 @@
+server:
+  port: 8888
+
+
+
+
+spring:
+  application:
+    name: skiff-gateway
+
+
+  cloud:
+    gateway:
+#      discovery:
+#        locator:
+#          #开启从注册中心动态创建路由的功能，利用微服务名进行路由
+#          enabled: false
+      routes:
+        - id: baidu
+          uri: https://www.baidu.com
+          predicates:
+            - Path=/api/baidu/**
+          filters:
+            - StripPrefix=2
+        - id: test
+          uri: http://127.0.0.1:8081
+          predicates:
+            - Path=/api/test/**
+          filters:
+            - StripPrefix=2
+skiff:
+  cloud:
+    gateway:
+      decryption:
+        - /api/test/result/getResultRequest
+      encryption:
+        - /api/test/**
+logging:
+  level:
+    com.skiff: debug

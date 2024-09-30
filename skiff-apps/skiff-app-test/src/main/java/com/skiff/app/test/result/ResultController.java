@@ -34,6 +34,10 @@ public class ResultController {
     public ObjectResult<ResultResponse> getResultRequest(@RequestBody ResultRequest resultRequest) {
         return Results.objectResult(BeanUtil.copy(resultRequest, ResultResponse.class));
     }
+    @PostMapping("/getResultRequest2")
+    public ObjectResult<ResultResponse> getResultRequest2(@RequestBody ResultRequest resultRequest) {
+        return Results.objectResult(BeanUtil.copy(resultRequest, ResultResponse.class));
+    }
 
     @PostMapping("/getResultFrom")
     public ObjectResult<ResultResponse> getResultFrom(ResultRequest resultRequest) {
