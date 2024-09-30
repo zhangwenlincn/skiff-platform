@@ -1,6 +1,6 @@
 package com.skiff.gateway.configuration;
 
-import com.skiff.gateway.filter.RequestDecryptionGlobalFilter;
+import com.skiff.gateway.filter.RequestDecryptionFilter;
 import com.skiff.gateway.properties.DecryptionEncryptionProperties;
 import com.skiff.gateway.service.KeySecretService;
 import org.springframework.context.annotation.Bean;
@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Configuration;
 public class GatewayConfiguration {
 
     @Bean
-    public RequestDecryptionGlobalFilter requestDecryptionGlobalFilter() {
-        return new RequestDecryptionGlobalFilter();
+    public RequestDecryptionFilter requestDecryptionFilter() {
+        return new RequestDecryptionFilter();
     }
 
 

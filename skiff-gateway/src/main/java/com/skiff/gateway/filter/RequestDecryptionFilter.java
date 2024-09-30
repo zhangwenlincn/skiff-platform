@@ -34,9 +34,9 @@ import java.util.List;
 import java.util.Optional;
 
 
-public class RequestDecryptionGlobalFilter implements GlobalFilter {
+public class RequestDecryptionFilter implements GlobalFilter {
 
-    private static final Logger log = LoggerFactory.getLogger(RequestDecryptionGlobalFilter.class);
+    private static final Logger log = LoggerFactory.getLogger(RequestDecryptionFilter.class);
 
     @Resource
     private DecryptionEncryptionProperties decryptionEncryptionProperties;
