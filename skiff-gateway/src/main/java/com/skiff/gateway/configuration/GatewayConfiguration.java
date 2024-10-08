@@ -1,7 +1,7 @@
 package com.skiff.gateway.configuration;
 
-import com.skiff.gateway.filter.RequestDecryptionFilter;
-import com.skiff.gateway.filter.ResponseEncryptionFilter;
+import com.skiff.gateway.filter.DecryptRequestBodyGatewayFilter;
+import com.skiff.gateway.filter.EncryptResponseBodyGatewayFilter;
 import com.skiff.gateway.properties.DecryptionEncryptionProperties;
 import com.skiff.gateway.service.KeySecretService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -15,18 +15,14 @@ public class GatewayConfiguration {
 
     @Bean
     @ConditionalOnProperty(name = "skiff.gateway.request.enabled")
-    public RequestDecryptionFilter requestDecryptionFilter() {
-        log.debug("request body decryption is enabled");
-        return new RequestDecryptionFilter();
+    public DecryptRequestBodyGatewayFilter modifyRequestBodyGatewayFilter() {
+        return new DecryptRequestBodyGatewayFilter();
     }
-
     @Bean
     @ConditionalOnProperty(name = "skiff.gateway.response.enabled")
-    public ResponseEncryptionFilter responseEncryptionFilter() {
-        log.debug("response body encryption is enabled");
-        return new ResponseEncryptionFilter();
+    public EncryptResponseBodyGatewayFilter encryptResponseBodyGatewayFilter() {
+        return new EncryptResponseBodyGatewayFilter();
     }
-
 
     @Bean
     public DecryptionEncryptionProperties decryptionEncryptionProperties() {

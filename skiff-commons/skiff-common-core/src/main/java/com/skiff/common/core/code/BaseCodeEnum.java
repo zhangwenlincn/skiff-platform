@@ -7,11 +7,15 @@ public enum BaseCodeEnum implements Code {
 
     SUCCESS("10000", "操作成功"),
     ERROR("10001", "操作失败"),
+    EXCEPTION_FAIL("10002", "操作异常"),
+
     AES_DECRYPT_FAIL("10010", "解密失败"),
-    APP_NOT_FOUND("10011", "应用不存在"),
-    PARAMETER_FAIL("10002", "参数校验未通过"),
-    ACTUATOR_FAIL("10003", "执行异常"),
-    EXCEPTION_FAIL("10004", "操作异常"),
+    AES_ENCRYPT_FAIL("10011", "加密失败"),
+    ACTUATOR_FAIL("10034", "执行异常"),
+
+    APP_NOT_FOUND("10021", "应用不存在"),
+    PARAMETER_FAIL("10022", "参数校验未通过"),
+
     SERIALIZATION_FAIL("10005", "序列化错误"),
     DESERIALIZATION_FAIL("10006", "反序列化错误"),
     URI_PATH_NOT_FOUND("10007", "URI路径不存在"),

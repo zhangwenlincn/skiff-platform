@@ -38,6 +38,7 @@ skiff:
       enabled: true
       urls:
         - /api/test/result/getResultRequest
+        - /api/test/result/getResultRequest2
 logging:
   level:
     com.skiff: debug

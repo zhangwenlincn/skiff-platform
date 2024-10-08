@@ -22,4 +22,19 @@ public class AESTest {
         System.out.println("encrypt: " + decrypt);
 
     }
+    //
+
+
+    @Test
+    @SneakyThrows
+    public void t2() {
+
+        String appSecret = "zrZJA8OF636DIONtmBhqmxtV90fQmYeUSc1frOMFcSg=";
+
+
+        String decrypt = AESUtil.decrypt("CVT/0b+gMycQCZqzGZW8Dpm4KiYzrC0TR4XnW6uj2Ek=", AESUtil.decodeKeyFromBase64(appSecret));
+
+        System.out.println("encrypt: " + decrypt);
+
+    }
 }
