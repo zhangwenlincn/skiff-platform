@@ -38,35 +38,36 @@ public class EncryptResponseBodyGatewayFilter implements GlobalFilter {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 
-        MediaType contentType = exchange.getRequest().getHeaders().getContentType();
-        String appKey = exchange.getRequest().getQueryParams().getFirst("appKey");
-        boolean isApplicationJson = contentType != null && contentType.isCompatibleWith(MediaType.APPLICATION_JSON);
-        if (!isApplicationJson) {
-            log.debug("response is not application/json content type, skip filter");
-            return chain.filter(exchange);
-        }
-
-        final ModifyResponseBodyGatewayFilterFactory.Config config = new ModifyResponseBodyGatewayFilterFactory.Config();
-        config.setRewriteFunction(String.class, String.class, (serverWebExchange, body) -> {
-            RequestPath path = exchange.getRequest().getPath();
-            if (decryptionEncryptionProperties.getResponse().getUrls().contains(path.value())) {
-                Map<String, Object> map = JsonUtil.toMap(body);
-                if (map.containsKey("success") && map.get("success") instanceof Boolean && (Boolean) map.get("success")) {
-                    Object data = map.get("data");
-                    if (data != null) {
-                        try {
-                            String encrypt = AESUtil.encrypt(JsonUtil.toJson(data), AESUtil.decodeKeyFromBase64(keySecretService.getSecretByKey(appKey)));
-                            map.put("data", encrypt);
-                            body = JsonUtil.toJson(map);
-                        } catch (Exception e) {
-                            throw new SkiffException(BaseCodeEnum.AES_DECRYPT_FAIL);
+        RequestPath path = exchange.getRequest().getPath();
+        if (decryptionEncryptionProperties.getResponse().getUrls().contains(path.value())) {
+            String appKey = exchange.getRequest().getQueryParams().getFirst("appKey");
+            final ModifyResponseBodyGatewayFilterFactory.Config config = new ModifyResponseBodyGatewayFilterFactory.Config();
+            config.setRewriteFunction(String.class, String.class, (serverWebExchange, body) -> {
+                MediaType responseContentType = serverWebExchange.getResponse().getHeaders().getContentType();
+                boolean isApplicationJson = responseContentType != null && responseContentType.isCompatibleWith(MediaType.APPLICATION_JSON);
+                if (isApplicationJson) {
+                    Map<String, Object> map = JsonUtil.toMap(body);
+                    if (map.containsKey("success") && map.get("success") instanceof Boolean && (Boolean) map.get("success")) {
+                        Object data = map.get("data");
+                        if (data != null) {
+                            try {
+                                String encrypt = AESUtil.encrypt(JsonUtil.toJson(data), AESUtil.decodeKeyFromBase64(keySecretService.getSecretByKey(appKey)));
+                                map.put("data", encrypt);
+                                body = JsonUtil.toJson(map);
+                            } catch (Exception e) {
+                                throw new SkiffException(BaseCodeEnum.AES_DECRYPT_FAIL);
+                            }
                         }
                     }
+                    return Mono.just(body);
+                } else {
+                    return Mono.empty();
                 }
-            }
-            return Mono.just(body);
-        });
-        return modifyResponseBodyFilterFactory.apply(config).filter(exchange, chain);
+            });
+            return modifyResponseBodyFilterFactory.apply(config).filter(exchange, chain);
+        } else {
+            return chain.filter(exchange);
+        }
     }
 
 }
