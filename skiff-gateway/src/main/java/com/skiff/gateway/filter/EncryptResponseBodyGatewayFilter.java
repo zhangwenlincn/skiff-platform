@@ -1,5 +1,7 @@
 package com.skiff.gateway.filter;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.skiff.common.core.code.BaseCodeEnum;
 import com.skiff.common.core.exception.SkiffException;
 import com.skiff.common.core.util.AESUtil;
@@ -17,8 +19,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.server.RequestPath;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
-
-import java.util.Map;
 
 
 @Order(-1)
@@ -46,17 +46,16 @@ public class EncryptResponseBodyGatewayFilter implements GlobalFilter {
                 MediaType responseContentType = serverWebExchange.getResponse().getHeaders().getContentType();
                 boolean isApplicationJson = responseContentType != null && responseContentType.isCompatibleWith(MediaType.APPLICATION_JSON);
                 if (isApplicationJson) {
-                    Map<String, Object> map = JsonUtil.toMap(body);
-                    if (map.containsKey("success") && map.get("success") instanceof Boolean && (Boolean) map.get("success")) {
-                        Object data = map.get("data");
-                        if (data != null) {
-                            try {
-                                String encrypt = AESUtil.encrypt(JsonUtil.toJson(data), AESUtil.decodeKeyFromBase64(keySecretService.getSecretByKey(appKey)));
-                                map.put("data", encrypt);
-                                body = JsonUtil.toJson(map);
-                            } catch (Exception e) {
-                                throw new SkiffException(BaseCodeEnum.AES_DECRYPT_FAIL);
-                            }
+                    JsonNode node = JsonUtil.toJsonNode(body);
+                    if (node.get("success").asBoolean(false) && node.has("data")) {
+                        try {
+                            JsonNode data = node.get("data");
+                            String encrypt = AESUtil.encrypt(JsonUtil.toJson(data), AESUtil.decodeKeyFromBase64(keySecretService.getSecretByKey(appKey)));
+                            ObjectNode objectNode = (ObjectNode) node;
+                            objectNode.put("data", encrypt);
+                            body = JsonUtil.toJson(objectNode);
+                        } catch (Exception e) {
+                            throw new SkiffException(BaseCodeEnum.AES_DECRYPT_FAIL);
                         }
                     }
                     return Mono.just(body);

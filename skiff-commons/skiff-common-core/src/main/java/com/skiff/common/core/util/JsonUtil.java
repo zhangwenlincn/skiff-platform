@@ -2,6 +2,7 @@ package com.skiff.common.core.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.skiff.common.core.code.BaseCodeEnum;
 import com.skiff.common.core.exception.SkiffException;
@@ -73,5 +74,13 @@ public class JsonUtil {
             excludeFields.forEach(map::remove);
         }
         return map;
+    }
+
+    public static JsonNode toJsonNode(String json) {
+        try {
+            return getObjectMapper().readTree(json);
+        } catch (JsonProcessingException e) {
+            throw new SkiffException(BaseCodeEnum.DESERIALIZATION_FAIL, e);
+        }
     }
 }
