@@ -6,6 +6,8 @@ import com.skiff.common.message.helper.MessageActuatorHelper;
 import com.skiff.common.message.register.MessageActuatorRegister;
 import org.springframework.context.ApplicationContext;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 public class SpringMessageActuatorRegister implements MessageActuatorRegister {
@@ -18,10 +20,18 @@ public class SpringMessageActuatorRegister implements MessageActuatorRegister {
 
     @Override
     public void register(String... packages) {
+
+        if (packages == null || packages.length == 0) {
+            throw new IllegalArgumentException("packages must not be null or empty");
+        }
+        List<String> packageList = Arrays.stream(packages).toList();
         Map<String, Object> beansWithAnnotation = applicationContext.getBeansWithAnnotation(MessageActuator.class);
         beansWithAnnotation.forEach((name, bean) -> {
-            MessageActuator annotation = bean.getClass().getAnnotation(MessageActuator.class);
-            MessageActuatorHelper.add(annotation.group() + ":" + annotation.topic(), (Actuator<?>) bean);
+            String packageName = bean.getClass().getPackageName();
+            if (packageList.stream().anyMatch(packageName::startsWith)) {
+                MessageActuator annotation = bean.getClass().getAnnotation(MessageActuator.class);
+                MessageActuatorHelper.add(annotation.group() + ":" + annotation.topic(), (Actuator<?>) bean);
+            }
         });
     }
 
