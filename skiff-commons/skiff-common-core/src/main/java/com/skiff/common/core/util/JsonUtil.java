@@ -4,10 +4,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.skiff.common.core.code.BaseCodeEnum;
 import com.skiff.common.core.exception.SkiffException;
 import com.skiff.common.core.json.JacksonEnum;
+import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -43,42 +46,66 @@ public class JsonUtil {
         }
     }
 
-    public static String toJson(Object obj) {
+    public static <T> String toJson(T t) {
         ObjectMapper objectMapper = getObjectMapper();
         try {
-            return objectMapper.writeValueAsString(obj);
+            return objectMapper.writeValueAsString(t);
         } catch (JsonProcessingException e) {
             throw new SkiffException(BaseCodeEnum.SERIALIZATION_FAIL, e);
         }
     }
 
-    public static <T> String toJson(T obj, List<String> fields) {
-        return toJson(obj, fields, true);
+    /**
+     * 过滤掉指定字段，并返回json字符串
+     *
+     * @param t           source object
+     * @param excludeFields exclude fields
+     * @param <T>           T
+     * @return json string
+     */
+    public static <T> String toJsonExclude(T t, List<String> excludeFields) {
+        ObjectNode objectNode = JsonUtil.toObjectNode(JsonUtil.toJson(t));
+        return toJson(filter(objectNode, excludeFields));
     }
 
-    public static <T> String toJson(T obj, List<String> fields, boolean exclude) {
-        String json = JsonUtil.toJson(obj);
-        Map<String, Object> map = JsonUtil.toMap(json);
-        List<String> excludeFields;
-        if (exclude) {
-            //移除不在fields中的字段
-            excludeFields = map.keySet().stream().filter(x -> !fields.contains(x)).toList();
-        } else {
-            excludeFields = fields;
-        }
-        return toJson(filter(map, excludeFields));
+    /**
+     * 过滤出指定字段，并返回json字符串
+     *
+     * @param t           source object
+     * @param includeFields exclude fields
+     * @param <T>           T
+     * @return json string
+     */
+    public static <T> String toJsonInclude(T t, List<String> includeFields) {
+        ObjectNode objectNode = JsonUtil.toObjectNode(JsonUtil.toJson(t));
+        List<String> excludeFields = new ArrayList<>();
+        objectNode.fieldNames().forEachRemaining(field -> {
+            if (!includeFields.contains(field)) {
+                excludeFields.add(field);
+            }
+        });
+        return toJson(filter(objectNode, excludeFields));
     }
 
-    public static <T> Map<String, T> filter(Map<String, T> map, List<String> excludeFields) {
+
+    public static ObjectNode filter(ObjectNode objectNode, List<String> excludeFields) {
         if (excludeFields != null && !excludeFields.isEmpty()) {
-            excludeFields.forEach(map::remove);
+            excludeFields.forEach(objectNode::remove);
         }
-        return map;
+        return objectNode;
     }
 
     public static JsonNode toJsonNode(String json) {
         try {
             return getObjectMapper().readTree(json);
+        } catch (JsonProcessingException e) {
+            throw new SkiffException(BaseCodeEnum.DESERIALIZATION_FAIL, e);
+        }
+    }
+
+    public static ObjectNode toObjectNode(String json) {
+        try {
+            return (ObjectNode) getObjectMapper().readTree(json);
         } catch (JsonProcessingException e) {
             throw new SkiffException(BaseCodeEnum.DESERIALIZATION_FAIL, e);
         }
