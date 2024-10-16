@@ -17,6 +17,7 @@
     </modules>
 
     <properties>
+        <os.detected.classifier>windows-x86_64</os.detected.classifier>
         <skiff.version>1.0</skiff.version>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
@@ -214,9 +215,9 @@
                     <artifactId>protobuf-maven-plugin</artifactId>
                     <version>0.6.1</version>
                     <configuration>
-                        <protocArtifact>com.google.protobuf:protoc:${protobuf.java.version}:exe:windows-x86_64</protocArtifact>
+                        <protocArtifact>com.google.protobuf:protoc:${protobuf.java.version}:exe:${os.detected.classifier}</protocArtifact>
                         <pluginId>grpc-java</pluginId>
-                        <pluginArtifact>io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:windows-x86_64</pluginArtifact>
+                        <pluginArtifact>io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}</pluginArtifact>
                         <outputBaseDirectory>${project.build.directory}/generated-sources/protobuf</outputBaseDirectory>
                     </configuration>
                     <executions>
