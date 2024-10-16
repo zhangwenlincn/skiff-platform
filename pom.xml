@@ -13,10 +13,11 @@
         <module>skiff-starters</module>
         <module>skiff-apps</module>
         <module>skiff-gateway</module>
+        <module>skiff-protobuf</module>
     </modules>
 
     <properties>
-        <skiff-platform.version>1.0</skiff-platform.version>
+        <skiff.version>1.0</skiff.version>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <mavem.compiler.plugin.version>3.13.0</mavem.compiler.plugin.version>
@@ -25,8 +26,8 @@
         <spring.boot.version>3.3.0</spring.boot.version>
         <spring.cloud.version>2023.0.2</spring.cloud.version>
         <spring.cloud.alibaba.version>2023.0.1.0</spring.cloud.alibaba.version>
-        <grpc.version>1.64.0</grpc.version>
-        <protobuf.java.version>3.25.3</protobuf.java.version>
+        <grpc.version>1.68.0</grpc.version>
+        <protobuf.java.version>3.25.5</protobuf.java.version>
         <lombok.version>1.18.32</lombok.version>
         <netty.version>4.1.112.Final</netty.version>
         <redission.version>3.31.0</redission.version>
@@ -108,23 +109,29 @@
             <dependency>
                 <groupId>com.skiff.common.core</groupId>
                 <artifactId>skiff-common-core</artifactId>
-                <version>${skiff-platform.version}</version>
+                <version>${skiff.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.skiff.common.web</groupId>
                 <artifactId>skiff-common-web</artifactId>
-                <version>${skiff-platform.version}</version>
+                <version>${skiff.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.skiff.common.message</groupId>
                 <artifactId>skiff-common-message</artifactId>
-                <version>${skiff-platform.version}</version>
+                <version>${skiff.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.skiff.starter.message</groupId>
                 <artifactId>skiff-message-spring-boot-starter</artifactId>
-                <version>${skiff-platform.version}</version>
+                <version>${skiff.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.skiff.protobuf</groupId>
+                <artifactId>skiff-protobuf</artifactId>
+                <version>${skiff.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -200,6 +207,28 @@
                         </execution>
                     </executions>
                 </plugin>
+
+                <!-- protobuf插件 -->
+                <plugin>
+                    <groupId>org.xolstice.maven.plugins</groupId>
+                    <artifactId>protobuf-maven-plugin</artifactId>
+                    <version>0.6.1</version>
+                    <configuration>
+                        <protocArtifact>com.google.protobuf:protoc:${protobuf.java.version}:exe:windows-x86_64</protocArtifact>
+                        <pluginId>grpc-java</pluginId>
+                        <pluginArtifact>io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:windows-x86_64</pluginArtifact>
+                        <outputBaseDirectory>${project.build.directory}/generated-sources/protobuf</outputBaseDirectory>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>compile</goal>
+                                <goal>compile-custom</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
             </plugins>
         </pluginManagement>
     </build>

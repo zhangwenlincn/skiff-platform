@@ -44,6 +44,11 @@
             <groupId>com.skiff.common.web</groupId>
             <artifactId>skiff-common-web</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.skiff.protobuf</groupId>
+            <artifactId>skiff-protobuf</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
