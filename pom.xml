@@ -27,7 +27,7 @@
         <spring.cloud.version>2023.0.2</spring.cloud.version>
         <spring.cloud.alibaba.version>2023.0.1.0</spring.cloud.alibaba.version>
         <grpc.version>1.68.0</grpc.version>
-        <protobuf.java.version>3.25.5</protobuf.java.version>
+        <protobuf.java.version>4.28.2</protobuf.java.version>
         <lombok.version>1.18.32</lombok.version>
         <netty.version>4.1.112.Final</netty.version>
         <redission.version>3.31.0</redission.version>
