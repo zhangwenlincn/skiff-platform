@@ -114,11 +114,6 @@
                 <version>${skiff.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.skiff.common.web</groupId>
-                <artifactId>skiff-common-web</artifactId>
-                <version>${skiff.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>com.skiff.common.message</groupId>
                 <artifactId>skiff-common-message</artifactId>
                 <version>${skiff.version}</version>
