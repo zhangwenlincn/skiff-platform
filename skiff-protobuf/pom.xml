@@ -40,14 +40,14 @@
     <build>
         <plugins>
             <!-- protobuf插件 -->
-            <plugin>
-                <groupId>org.xolstice.maven.plugins</groupId>
-                <artifactId>protobuf-maven-plugin</artifactId>
-                <configuration>
-<!--                    <protoSourceRoot>${project.basedir}/src/main/proto</protoSourceRoot>-->
-<!--                    <outputDirectory>${project.basedir}/src/main/java</outputDirectory>-->
-                </configuration>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.xolstice.maven.plugins</groupId>-->
+<!--                <artifactId>protobuf-maven-plugin</artifactId>-->
+<!--                <configuration>-->
+<!--&lt;!&ndash;                    <protoSourceRoot>${project.basedir}/src/main/proto</protoSourceRoot>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <outputDirectory>${project.basedir}/src/main/java</outputDirectory>&ndash;&gt;-->
+<!--                </configuration>-->
+<!--            </plugin>-->
         </plugins>
     </build>
 

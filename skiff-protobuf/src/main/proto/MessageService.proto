@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+
+import "Message.proto";
+import "RpcResult.proto";
+
+package com.skiff.protobuf.rpc;
+option java_outer_classname = "MessageGrpcService";
+
+
+
+service MessageService {
+
+  rpc SendMessage(MessageRequest) returns (Result){}
+
+}

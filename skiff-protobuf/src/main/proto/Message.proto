@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+option java_package = "com.skiff.protobuf.entity";
+option java_outer_classname = "Message";
+
+message MessageRequest {
+  optional  string id = 1;
+  optional  string content = 2;
+  optional  string sender = 3;
+  optional  string receiver = 4;
+}

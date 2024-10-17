@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+option java_package = "com.skiff.protobuf.result";
+option java_outer_classname = "RpcResult";
+
+message Result {
+  string  code = 1;
+  bool success = 2;
+  string message = 3;
+  bytes data = 4;
+}
