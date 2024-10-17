@@ -23,6 +23,8 @@ public class Client {
 
         System.out.println(result.getCode());
         System.out.println(result.getMessage());
+        System.out.println(result.getSuccess());
+        System.out.println(result.getData().toStringUtf8());
 
         channel.shutdown();
     }
