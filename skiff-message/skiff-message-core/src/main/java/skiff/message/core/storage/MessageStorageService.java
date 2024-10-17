@@ -1,7 +1,6 @@
 package skiff.message.core.storage;
 
 
-
 import skiff.message.core.base.Message;
 
 import java.util.List;

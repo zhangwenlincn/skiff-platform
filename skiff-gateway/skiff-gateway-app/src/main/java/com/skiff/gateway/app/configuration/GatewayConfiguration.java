@@ -18,6 +18,7 @@ public class GatewayConfiguration {
     public DecryptRequestBodyGatewayFilter modifyRequestBodyGatewayFilter() {
         return new DecryptRequestBodyGatewayFilter();
     }
+
     @Bean
     @ConditionalOnProperty(name = "skiff.gateway.response.enabled")
     public EncryptResponseBodyGatewayFilter encryptResponseBodyGatewayFilter() {

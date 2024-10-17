@@ -8,7 +8,6 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.skiff.common.core.code.BaseCodeEnum;
 import com.skiff.common.core.exception.SkiffException;
 import com.skiff.common.core.json.JacksonEnum;
-import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +57,7 @@ public class JsonUtil {
     /**
      * 过滤掉指定字段，并返回json字符串
      *
-     * @param t           source object
+     * @param t             source object
      * @param excludeFields exclude fields
      * @param <T>           T
      * @return json string
@@ -71,7 +70,7 @@ public class JsonUtil {
     /**
      * 过滤出指定字段，并返回json字符串
      *
-     * @param t           source object
+     * @param t             source object
      * @param includeFields exclude fields
      * @param <T>           T
      * @return json string

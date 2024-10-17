@@ -14,8 +14,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>skiff-common-core</module>
-<!--        <module>skiff-common-web</module>-->
-<!--        <module>skiff-common-message</module>-->
+        <!--        <module>skiff-common-web</module>-->
+        <!--        <module>skiff-common-message</module>-->
     </modules>
 
     <properties>
