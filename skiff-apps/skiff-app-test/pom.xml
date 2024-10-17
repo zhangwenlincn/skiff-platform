@@ -37,7 +37,7 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.skiff.starter.message</groupId>
+            <groupId>com.skiff.message.starter</groupId>
             <artifactId>skiff-message-spring-boot-starter</artifactId>
         </dependency>
 

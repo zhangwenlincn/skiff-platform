@@ -2,13 +2,13 @@ package com.skiff.app.test.message;
 
 import com.skiff.common.core.result.BaseResult;
 import com.skiff.common.core.result.Results;
-import com.skiff.common.message.storage.MessageStorageService;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import skiff.message.core.storage.MessageStorageService;
 
 /**
  * 模拟消息测试类

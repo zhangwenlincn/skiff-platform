@@ -4,22 +4,24 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.skiff.registry</groupId>
-        <artifactId>skiff-registry</artifactId>
+        <groupId>com.skiff.platform</groupId>
+        <artifactId>skiff-platform</artifactId>
         <version>1.0</version>
     </parent>
 
-    <groupId>com.skiff.registry.sdk</groupId>
-    <artifactId>skiff-registry-sdk</artifactId>
+    <groupId>com.skiff.message</groupId>
+    <artifactId>skiff-message</artifactId>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>skiff-message-core</module>
+        <module>skiff-message-spring-boot-starter</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
-    <dependencies>
-
-    </dependencies>
 
 </project>

@@ -1,9 +1,9 @@
 package com.skiff.app.test.message;
 
-import com.skiff.common.message.annotation.MessageEntity;
-import com.skiff.common.message.core.BaseMessage;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import skiff.message.core.annotation.MessageEntity;
+import skiff.message.core.base.BaseMessage;
 
 
 @Data

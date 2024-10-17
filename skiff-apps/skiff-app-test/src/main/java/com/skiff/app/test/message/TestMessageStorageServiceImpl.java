@@ -1,9 +1,9 @@
 package com.skiff.app.test.message;
 
-import com.skiff.common.message.core.Message;
-import com.skiff.common.message.storage.MessageStorageService;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
+import skiff.message.core.base.Message;
+import skiff.message.core.storage.MessageStorageService;
 
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
