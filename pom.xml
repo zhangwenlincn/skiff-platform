@@ -10,11 +10,10 @@
     <packaging>pom</packaging>
     <modules>
         <module>skiff-commons</module>
-        <module>skiff-apps</module>
-        <module>skiff-gateway</module>
-        <module>skiff-protobuf</module>
         <module>skiff-registry</module>
         <module>skiff-message</module>
+        <module>skiff-gateway</module>
+        <module>skiff-protobuf</module>
     </modules>
 
     <properties>
@@ -219,7 +218,7 @@
                     </executions>
                 </plugin>
 
-                <!-- protobuf插件 -->
+                <!-- protobuf插件 不太好用 -->
                 <plugin>
                     <groupId>org.xolstice.maven.plugins</groupId>
                     <artifactId>protobuf-maven-plugin</artifactId>
