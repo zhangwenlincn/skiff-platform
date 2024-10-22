@@ -1,6 +1,5 @@
 package com.skiff.message.starter.configuration;
 
-import com.skiff.message.starter.properties.MessageStorageProperties;
 import com.skiff.message.starter.storage.MemoryMessageStorage;
 import org.slf4j.Logger;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
