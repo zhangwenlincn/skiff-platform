@@ -2,9 +2,11 @@ package com.skiff.message.starter.configuration;
 
 import com.skiff.message.starter.annotation.EnableMessage;
 import com.skiff.message.starter.register.SpringMessageActuatorRegister;
+import com.skiff.message.starter.storage.MemoryMessageStorage;
 import org.slf4j.Logger;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
@@ -27,7 +29,12 @@ public class SkiffMessageConfiguration implements ApplicationContextAware {
 
     private ApplicationContext applicationContext;
 
+
+
+
     private final MessageStorageService messageStorageService;
+
+
 
     public SkiffMessageConfiguration(MessageStorageService messageStorageService) {
         this.messageStorageService = messageStorageService;
@@ -37,7 +44,6 @@ public class SkiffMessageConfiguration implements ApplicationContextAware {
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
     }
-
     @Bean
     public MessageActuatorTask defaultMessageActuatorTask() {
         SpringMessageActuatorRegister register = new SpringMessageActuatorRegister(applicationContext);
@@ -58,4 +64,6 @@ public class SkiffMessageConfiguration implements ApplicationContextAware {
         task.schedule();
         return task;
     }
+
+
 }

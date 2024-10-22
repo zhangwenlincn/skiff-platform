@@ -1,8 +1,7 @@
-package com.skiff.message.app.storage;
+package com.skiff.message.starter.storage;
 
-import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
-import org.springframework.stereotype.Component;
+import org.springframework.core.annotation.Order;
 import skiff.message.core.base.Message;
 import skiff.message.core.storage.MessageStorageService;
 
@@ -10,11 +9,11 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-@RequiredArgsConstructor
-@Component
-public class MessageStorageComponent implements MessageStorageService {
+@Order(-1)
+public class MemoryMessageStorage implements MessageStorageService {
 
-    private static final Logger logger = org.slf4j.LoggerFactory.getLogger(MessageStorageComponent.class);
+    private static final Logger logger = org.slf4j.LoggerFactory.getLogger(MemoryMessageStorage.class);
+
 
     private static final ConcurrentMap<String, Message> executes = new ConcurrentHashMap<>();
     private static final ConcurrentMap<String, Message> locks = new ConcurrentHashMap<>();
