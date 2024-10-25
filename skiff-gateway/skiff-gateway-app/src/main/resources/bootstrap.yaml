@@ -5,14 +5,7 @@ spring:
     name: gateway
   cloud:
     nacos:
-      discovery:
-        server-addr: u.com:8848
-        namespace: skiff-platform-local
-        group: gateway
       config:
-        server-addr: u.com:8848
-        namespace: skiff-platform-local
-        group: gateway
         extension-configs:
           - data-id: ${spring.application.name}.yaml
             group: gateway

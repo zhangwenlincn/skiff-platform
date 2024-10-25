@@ -126,6 +126,12 @@
             </dependency>
 
             <dependency>
+                <groupId>com.skiff.common.nacos</groupId>
+                <artifactId>skiff-common-nacos-spring-boot-starter</artifactId>
+                <version>${skiff.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>com.skiff.protobuf</groupId>
                 <artifactId>skiff-protobuf</artifactId>
                 <version>${skiff.version}</version>
