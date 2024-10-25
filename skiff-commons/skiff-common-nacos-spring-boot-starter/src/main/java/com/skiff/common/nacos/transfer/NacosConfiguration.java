@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Configuration;
 @ConditionalOnNacosDiscoveryEnabled
 @AutoConfigureBefore({NacosDiscoveryAutoConfiguration.class})
 @EnableConfigurationProperties(NacosDiscoveryTransferProperties.class)
-@ConditionalOnProperty(value = "skiff.transfer.enabled")
+@ConditionalOnProperty(value = "skiff.transfer.openfeign.enabled")
 public class NacosConfiguration {
 
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(NacosConfiguration.class);

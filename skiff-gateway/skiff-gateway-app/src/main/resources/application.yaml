@@ -11,4 +11,5 @@ logging:
 
 skiff:
   transfer:
-    enabled: true
+    openfeign:
+      enabled: true

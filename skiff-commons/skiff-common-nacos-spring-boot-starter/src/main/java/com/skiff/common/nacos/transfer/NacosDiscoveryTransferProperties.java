@@ -4,7 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.List;
 
-@ConfigurationProperties(prefix = "skiff.transfer")
+@ConfigurationProperties(prefix = "skiff.transfer.openfeign")
 public class NacosDiscoveryTransferProperties {
 
     private boolean enabled;
