@@ -8,3 +8,7 @@ spring:
 logging:
   level:
     com.skiff: debug
+
+skiff:
+  transfer:
+    enabled: true
