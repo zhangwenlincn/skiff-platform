@@ -18,7 +18,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Properties;
 
-
 import static com.alibaba.nacos.api.PropertyKeyConst.NAMESPACE;
 
 public class TransferNacosServiceDiscovery extends NacosServiceDiscovery {
@@ -34,6 +33,47 @@ public class TransferNacosServiceDiscovery extends NacosServiceDiscovery {
         this.discoveryProperties = discoveryProperties;
         this.nacosServiceManager = nacosServiceManager;
         this.nacosDiscoveryTransferProperties = nacosDiscoveryTransferProperties;
+    }
+
+    public static List<ServiceInstance> hostToServiceInstanceList(
+            List<Instance> instances, String serviceId) {
+        List<ServiceInstance> result = new ArrayList<>(instances.size());
+        for (Instance instance : instances) {
+            ServiceInstance serviceInstance = hostToServiceInstance(instance, serviceId);
+            if (serviceInstance != null) {
+                result.add(serviceInstance);
+            }
+        }
+        return result;
+    }
+
+    public static ServiceInstance hostToServiceInstance(Instance instance,
+                                                        String serviceId) {
+        if (instance == null || !instance.isEnabled() || !instance.isHealthy()) {
+            return null;
+        }
+        NacosServiceInstance nacosServiceInstance = new NacosServiceInstance();
+        nacosServiceInstance.setHost(instance.getIp());
+        nacosServiceInstance.setPort(instance.getPort());
+        nacosServiceInstance.setServiceId(serviceId);
+        nacosServiceInstance.setInstanceId(instance.getInstanceId());
+
+        Map<String, String> metadata = new HashMap<>();
+        metadata.put("nacos.instanceId", instance.getInstanceId());
+        metadata.put("nacos.weight", instance.getWeight() + "");
+        metadata.put("nacos.healthy", instance.isHealthy() + "");
+        metadata.put("nacos.cluster", instance.getClusterName());
+        if (instance.getMetadata() != null) {
+            metadata.putAll(instance.getMetadata());
+        }
+        metadata.put("nacos.ephemeral", String.valueOf(instance.isEphemeral()));
+        nacosServiceInstance.setMetadata(metadata);
+
+        if (metadata.containsKey("secure")) {
+            boolean secure = Boolean.parseBoolean(metadata.get("secure"));
+            nacosServiceInstance.setSecure(secure);
+        }
+        return nacosServiceInstance;
     }
 
     /**
@@ -72,47 +112,6 @@ public class TransferNacosServiceDiscovery extends NacosServiceDiscovery {
         ListView<String> services = namingService().getServicesOfServer(1,
                 Integer.MAX_VALUE, group);
         return services.getData();
-    }
-
-    public static List<ServiceInstance> hostToServiceInstanceList(
-            List<Instance> instances, String serviceId) {
-        List<ServiceInstance> result = new ArrayList<>(instances.size());
-        for (Instance instance : instances) {
-            ServiceInstance serviceInstance = hostToServiceInstance(instance, serviceId);
-            if (serviceInstance != null) {
-                result.add(serviceInstance);
-            }
-        }
-        return result;
-    }
-
-    public static ServiceInstance hostToServiceInstance(Instance instance,
-                                                        String serviceId) {
-        if (instance == null || !instance.isEnabled() || !instance.isHealthy()) {
-            return null;
-        }
-        NacosServiceInstance nacosServiceInstance = new NacosServiceInstance();
-        nacosServiceInstance.setHost(instance.getIp());
-        nacosServiceInstance.setPort(instance.getPort());
-        nacosServiceInstance.setServiceId(serviceId);
-        nacosServiceInstance.setInstanceId(instance.getInstanceId());
-
-        Map<String, String> metadata = new HashMap<>();
-        metadata.put("nacos.instanceId", instance.getInstanceId());
-        metadata.put("nacos.weight", instance.getWeight() + "");
-        metadata.put("nacos.healthy", instance.isHealthy() + "");
-        metadata.put("nacos.cluster", instance.getClusterName() + "");
-        if (instance.getMetadata() != null) {
-            metadata.putAll(instance.getMetadata());
-        }
-        metadata.put("nacos.ephemeral", String.valueOf(instance.isEphemeral()));
-        nacosServiceInstance.setMetadata(metadata);
-
-        if (metadata.containsKey("secure")) {
-            boolean secure = Boolean.parseBoolean(metadata.get("secure"));
-            nacosServiceInstance.setSecure(secure);
-        }
-        return nacosServiceInstance;
     }
 
     private NamingService namingService() {

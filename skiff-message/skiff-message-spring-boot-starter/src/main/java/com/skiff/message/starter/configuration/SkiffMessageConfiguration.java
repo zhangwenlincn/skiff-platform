@@ -25,10 +25,8 @@ import java.util.stream.Collectors;
 public class SkiffMessageConfiguration implements ApplicationContextAware {
 
     private static final Logger logger = org.slf4j.LoggerFactory.getLogger(SkiffMessageConfiguration.class);
-
-    private ApplicationContext applicationContext;
-
     private final MessageStorageService messageStorageService;
+    private ApplicationContext applicationContext;
 
     public SkiffMessageConfiguration(MessageStorageService messageStorageService) {
         this.messageStorageService = messageStorageService;

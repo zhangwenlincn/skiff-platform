@@ -40,6 +40,15 @@ public class Pager implements Serializable {
 
     private Integer end;
 
+    public Pager() {
+
+    }
+
+    public Pager(Integer pageIndex, Integer pageSize) {
+        this.pageIndex = pageIndex;
+        this.pageSize = pageSize;
+    }
+
     @Transient
     public Integer getStart() {
         return start;
@@ -48,16 +57,6 @@ public class Pager implements Serializable {
     @Transient
     public Integer getEnd() {
         return end;
-    }
-
-    public Pager() {
-
-    }
-
-
-    public Pager(Integer pageIndex, Integer pageSize) {
-        this.pageIndex = pageIndex;
-        this.pageSize = pageSize;
     }
 
     /**

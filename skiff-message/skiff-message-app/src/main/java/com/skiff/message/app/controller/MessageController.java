@@ -3,9 +3,13 @@ package com.skiff.message.app.controller;
 import com.skiff.common.core.result.BaseResult;
 import com.skiff.common.core.result.Results;
 import com.skiff.message.app.message.OrderMessage;
+import com.skiff.message.app.request.MessageRequest;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,6 +41,11 @@ public class MessageController {
             orderMessage.setDelay(i);
             messageStorageService.saveMessage(orderMessage);
         }
+        return Results.baseResult(true);
+    }
+
+    @PostMapping(value = "/message")
+    public BaseResult message(@Validated @RequestBody MessageRequest request) {
         return Results.baseResult(true);
     }
 

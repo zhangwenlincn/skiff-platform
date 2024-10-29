@@ -1,9 +1,13 @@
 package com.skiff.common.nacos.transfer;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.List;
 
+@Getter
+@Setter
 @ConfigurationProperties(prefix = "skiff.transfer.openfeign")
 public class NacosDiscoveryTransferProperties {
 
@@ -11,24 +15,10 @@ public class NacosDiscoveryTransferProperties {
 
     private List<Transfer> transfers;
 
-    public boolean isEnabled() {
-        return enabled;
-    }
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public List<Transfer> getTransfers() {
-        return transfers;
-    }
-
-    public void setTransfers(List<Transfer> transfers) {
-        this.transfers = transfers;
-    }
-
-
-    public static class Transfer{
+    @Setter
+    @Getter
+    public static class Transfer {
         /**
          * 服务名
          */
@@ -41,29 +31,5 @@ public class NacosDiscoveryTransferProperties {
          * 漂移namespace
          */
         String namespace;
-
-        public String getServiceId() {
-            return serviceId;
-        }
-
-        public void setServiceId(String serviceId) {
-            this.serviceId = serviceId;
-        }
-
-        public String getGroup() {
-            return group;
-        }
-
-        public void setGroup(String group) {
-            this.group = group;
-        }
-
-        public String getNamespace() {
-            return namespace;
-        }
-
-        public void setNamespace(String namespace) {
-            this.namespace = namespace;
-        }
     }
 }

@@ -6,8 +6,13 @@
 package com.skiff.protobuf.core;
 
 public final class RpcResult {
-    private RpcResult() {
-    }
+    private static final com.google.protobuf.Descriptors.Descriptor
+            internal_static_Result_descriptor;
+    private static final
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internal_static_Result_fieldAccessorTable;
+    private static com.google.protobuf.Descriptors.FileDescriptor
+            descriptor;
 
     static {
         com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
@@ -19,6 +24,29 @@ public final class RpcResult {
                 RpcResult.class.getName());
     }
 
+    static {
+        String[] descriptorData = {
+                "\n\017RpcResult.proto\"F\n\006Result\022\014\n\004code\030\001 \001(" +
+                        "\t\022\017\n\007success\030\002 \001(\010\022\017\n\007message\030\003 \001(\t\022\014\n\004d" +
+                        "ata\030\004 \001(\014B$\n\027com.skiff.protobuf.coreB\tRp" +
+                        "cResultb\006proto3"
+        };
+        descriptor = com.google.protobuf.Descriptors.FileDescriptor
+                .internalBuildGeneratedFileFrom(descriptorData,
+                        new com.google.protobuf.Descriptors.FileDescriptor[]{
+                        });
+        internal_static_Result_descriptor =
+                getDescriptor().getMessageTypes().get(0);
+        internal_static_Result_fieldAccessorTable = new
+                com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+                internal_static_Result_descriptor,
+                new String[]{"Code", "Success", "Message", "Data",});
+        descriptor.resolveAllFeaturesImmutable();
+    }
+
+    private RpcResult() {
+    }
+
     public static void registerAllExtensions(
             com.google.protobuf.ExtensionRegistryLite registry) {
     }
@@ -27,6 +55,11 @@ public final class RpcResult {
             com.google.protobuf.ExtensionRegistry registry) {
         registerAllExtensions(
                 (com.google.protobuf.ExtensionRegistryLite) registry);
+    }
+
+    public static com.google.protobuf.Descriptors.FileDescriptor
+    getDescriptor() {
+        return descriptor;
     }
 
     public interface ResultOrBuilder extends
@@ -85,7 +118,34 @@ public final class RpcResult {
             com.google.protobuf.GeneratedMessage implements
             // @@protoc_insertion_point(message_implements:Result)
             ResultOrBuilder {
+        public static final int CODE_FIELD_NUMBER = 1;
+        public static final int SUCCESS_FIELD_NUMBER = 2;
+        public static final int MESSAGE_FIELD_NUMBER = 3;
+        public static final int DATA_FIELD_NUMBER = 4;
         private static final long serialVersionUID = 0L;
+        // @@protoc_insertion_point(class_scope:Result)
+        private static final Result DEFAULT_INSTANCE;
+        private static final com.google.protobuf.Parser<Result>
+                PARSER = new com.google.protobuf.AbstractParser<Result>() {
+            @Override
+            public Result parsePartialFrom(
+                    com.google.protobuf.CodedInputStream input,
+                    com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                    throws com.google.protobuf.InvalidProtocolBufferException {
+                Builder builder = newBuilder();
+                try {
+                    builder.mergeFrom(input, extensionRegistry);
+                } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+                    throw e.setUnfinishedMessage(builder.buildPartial());
+                } catch (com.google.protobuf.UninitializedMessageException e) {
+                    throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+                } catch (java.io.IOException e) {
+                    throw new com.google.protobuf.InvalidProtocolBufferException(e)
+                            .setUnfinishedMessage(builder.buildPartial());
+                }
+                return builder.buildPartial();
+            }
+        };
 
         static {
             com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
@@ -97,6 +157,17 @@ public final class RpcResult {
                     Result.class.getName());
         }
 
+        static {
+            DEFAULT_INSTANCE = new Result();
+        }
+
+        @SuppressWarnings("serial")
+        private volatile Object code_ = "";
+        private boolean success_ = false;
+        @SuppressWarnings("serial")
+        private volatile Object message_ = "";
+        private com.google.protobuf.ByteString data_ = com.google.protobuf.ByteString.EMPTY;
+        private byte memoizedIsInitialized = -1;
         // Use Result.newBuilder() to construct.
         private Result(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
             super(builder);
@@ -113,6 +184,103 @@ public final class RpcResult {
             return RpcResult.internal_static_Result_descriptor;
         }
 
+        public static Result parseFrom(
+                java.nio.ByteBuffer data)
+                throws com.google.protobuf.InvalidProtocolBufferException {
+            return PARSER.parseFrom(data);
+        }
+
+        public static Result parseFrom(
+                java.nio.ByteBuffer data,
+                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                throws com.google.protobuf.InvalidProtocolBufferException {
+            return PARSER.parseFrom(data, extensionRegistry);
+        }
+
+        public static Result parseFrom(
+                com.google.protobuf.ByteString data)
+                throws com.google.protobuf.InvalidProtocolBufferException {
+            return PARSER.parseFrom(data);
+        }
+
+        public static Result parseFrom(
+                com.google.protobuf.ByteString data,
+                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                throws com.google.protobuf.InvalidProtocolBufferException {
+            return PARSER.parseFrom(data, extensionRegistry);
+        }
+
+        public static Result parseFrom(byte[] data)
+                throws com.google.protobuf.InvalidProtocolBufferException {
+            return PARSER.parseFrom(data);
+        }
+
+        public static Result parseFrom(
+                byte[] data,
+                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                throws com.google.protobuf.InvalidProtocolBufferException {
+            return PARSER.parseFrom(data, extensionRegistry);
+        }
+
+        public static Result parseFrom(java.io.InputStream input)
+                throws java.io.IOException {
+            return com.google.protobuf.GeneratedMessage
+                    .parseWithIOException(PARSER, input);
+        }
+
+        public static Result parseFrom(
+                java.io.InputStream input,
+                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                throws java.io.IOException {
+            return com.google.protobuf.GeneratedMessage
+                    .parseWithIOException(PARSER, input, extensionRegistry);
+        }
+
+        public static Result parseDelimitedFrom(java.io.InputStream input)
+                throws java.io.IOException {
+            return com.google.protobuf.GeneratedMessage
+                    .parseDelimitedWithIOException(PARSER, input);
+        }
+
+        public static Result parseDelimitedFrom(
+                java.io.InputStream input,
+                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                throws java.io.IOException {
+            return com.google.protobuf.GeneratedMessage
+                    .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+        }
+
+        public static Result parseFrom(
+                com.google.protobuf.CodedInputStream input)
+                throws java.io.IOException {
+            return com.google.protobuf.GeneratedMessage
+                    .parseWithIOException(PARSER, input);
+        }
+
+        public static Result parseFrom(
+                com.google.protobuf.CodedInputStream input,
+                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                throws java.io.IOException {
+            return com.google.protobuf.GeneratedMessage
+                    .parseWithIOException(PARSER, input, extensionRegistry);
+        }
+
+        public static Builder newBuilder() {
+            return DEFAULT_INSTANCE.toBuilder();
+        }
+
+        public static Builder newBuilder(Result prototype) {
+            return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+        }
+
+        public static Result getDefaultInstance() {
+            return DEFAULT_INSTANCE;
+        }
+
+        public static com.google.protobuf.Parser<Result> parser() {
+            return PARSER;
+        }
+
         @Override
         protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
@@ -120,10 +288,6 @@ public final class RpcResult {
                     .ensureFieldAccessorsInitialized(
                             Result.class, Builder.class);
         }
-
-        public static final int CODE_FIELD_NUMBER = 1;
-        @SuppressWarnings("serial")
-        private volatile Object code_ = "";
 
         /**
          * <code>string code = 1;</code>
@@ -164,9 +328,6 @@ public final class RpcResult {
             }
         }
 
-        public static final int SUCCESS_FIELD_NUMBER = 2;
-        private boolean success_ = false;
-
         /**
          * <code>bool success = 2;</code>
          *
@@ -176,10 +337,6 @@ public final class RpcResult {
         public boolean getSuccess() {
             return success_;
         }
-
-        public static final int MESSAGE_FIELD_NUMBER = 3;
-        @SuppressWarnings("serial")
-        private volatile Object message_ = "";
 
         /**
          * <code>string message = 3;</code>
@@ -220,9 +377,6 @@ public final class RpcResult {
             }
         }
 
-        public static final int DATA_FIELD_NUMBER = 4;
-        private com.google.protobuf.ByteString data_ = com.google.protobuf.ByteString.EMPTY;
-
         /**
          * <code>bytes data = 4;</code>
          *
@@ -232,8 +386,6 @@ public final class RpcResult {
         public com.google.protobuf.ByteString getData() {
             return data_;
         }
-
-        private byte memoizedIsInitialized = -1;
 
         @Override
         public final boolean isInitialized() {
@@ -331,98 +483,9 @@ public final class RpcResult {
             return hash;
         }
 
-        public static Result parseFrom(
-                java.nio.ByteBuffer data)
-                throws com.google.protobuf.InvalidProtocolBufferException {
-            return PARSER.parseFrom(data);
-        }
-
-        public static Result parseFrom(
-                java.nio.ByteBuffer data,
-                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-                throws com.google.protobuf.InvalidProtocolBufferException {
-            return PARSER.parseFrom(data, extensionRegistry);
-        }
-
-        public static Result parseFrom(
-                com.google.protobuf.ByteString data)
-                throws com.google.protobuf.InvalidProtocolBufferException {
-            return PARSER.parseFrom(data);
-        }
-
-        public static Result parseFrom(
-                com.google.protobuf.ByteString data,
-                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-                throws com.google.protobuf.InvalidProtocolBufferException {
-            return PARSER.parseFrom(data, extensionRegistry);
-        }
-
-        public static Result parseFrom(byte[] data)
-                throws com.google.protobuf.InvalidProtocolBufferException {
-            return PARSER.parseFrom(data);
-        }
-
-        public static Result parseFrom(
-                byte[] data,
-                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-                throws com.google.protobuf.InvalidProtocolBufferException {
-            return PARSER.parseFrom(data, extensionRegistry);
-        }
-
-        public static Result parseFrom(java.io.InputStream input)
-                throws java.io.IOException {
-            return com.google.protobuf.GeneratedMessage
-                    .parseWithIOException(PARSER, input);
-        }
-
-        public static Result parseFrom(
-                java.io.InputStream input,
-                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-                throws java.io.IOException {
-            return com.google.protobuf.GeneratedMessage
-                    .parseWithIOException(PARSER, input, extensionRegistry);
-        }
-
-        public static Result parseDelimitedFrom(java.io.InputStream input)
-                throws java.io.IOException {
-            return com.google.protobuf.GeneratedMessage
-                    .parseDelimitedWithIOException(PARSER, input);
-        }
-
-        public static Result parseDelimitedFrom(
-                java.io.InputStream input,
-                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-                throws java.io.IOException {
-            return com.google.protobuf.GeneratedMessage
-                    .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-        }
-
-        public static Result parseFrom(
-                com.google.protobuf.CodedInputStream input)
-                throws java.io.IOException {
-            return com.google.protobuf.GeneratedMessage
-                    .parseWithIOException(PARSER, input);
-        }
-
-        public static Result parseFrom(
-                com.google.protobuf.CodedInputStream input,
-                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-                throws java.io.IOException {
-            return com.google.protobuf.GeneratedMessage
-                    .parseWithIOException(PARSER, input, extensionRegistry);
-        }
-
         @Override
         public Builder newBuilderForType() {
             return newBuilder();
-        }
-
-        public static Builder newBuilder() {
-            return DEFAULT_INSTANCE.toBuilder();
-        }
-
-        public static Builder newBuilder(Result prototype) {
-            return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
         }
 
         @Override
@@ -438,6 +501,16 @@ public final class RpcResult {
             return builder;
         }
 
+        @Override
+        public com.google.protobuf.Parser<Result> getParserForType() {
+            return PARSER;
+        }
+
+        @Override
+        public Result getDefaultInstanceForType() {
+            return DEFAULT_INSTANCE;
+        }
+
         /**
          * Protobuf type {@code Result}
          */
@@ -445,6 +518,23 @@ public final class RpcResult {
                 com.google.protobuf.GeneratedMessage.Builder<Builder> implements
                 // @@protoc_insertion_point(builder_implements:Result)
                 ResultOrBuilder {
+            private int bitField0_;
+            private Object code_ = "";
+            private boolean success_;
+            private Object message_ = "";
+            private com.google.protobuf.ByteString data_ = com.google.protobuf.ByteString.EMPTY;
+
+            // Construct using com.skiff.protobuf.core.RpcResult.Result.newBuilder()
+            private Builder() {
+
+            }
+
+            private Builder(
+                    com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+                super(parent);
+
+            }
+
             public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
                 return RpcResult.internal_static_Result_descriptor;
@@ -456,17 +546,6 @@ public final class RpcResult {
                 return RpcResult.internal_static_Result_fieldAccessorTable
                         .ensureFieldAccessorsInitialized(
                                 Result.class, Builder.class);
-            }
-
-            // Construct using com.skiff.protobuf.core.RpcResult.Result.newBuilder()
-            private Builder() {
-
-            }
-
-            private Builder(
-                    com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-                super(parent);
-
             }
 
             @Override
@@ -616,10 +695,6 @@ public final class RpcResult {
                 return this;
             }
 
-            private int bitField0_;
-
-            private Object code_ = "";
-
             /**
              * <code>string code = 1;</code>
              *
@@ -636,6 +711,23 @@ public final class RpcResult {
                 } else {
                     return (String) ref;
                 }
+            }
+
+            /**
+             * <code>string code = 1;</code>
+             *
+             * @param value The code to set.
+             * @return This builder for chaining.
+             */
+            public Builder setCode(
+                    String value) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                code_ = value;
+                bitField0_ |= 0x00000001;
+                onChanged();
+                return this;
             }
 
             /**
@@ -660,14 +752,15 @@ public final class RpcResult {
             /**
              * <code>string code = 1;</code>
              *
-             * @param value The code to set.
+             * @param value The bytes for code to set.
              * @return This builder for chaining.
              */
-            public Builder setCode(
-                    String value) {
+            public Builder setCodeBytes(
+                    com.google.protobuf.ByteString value) {
                 if (value == null) {
                     throw new NullPointerException();
                 }
+                checkByteStringIsUtf8(value);
                 code_ = value;
                 bitField0_ |= 0x00000001;
                 onChanged();
@@ -685,26 +778,6 @@ public final class RpcResult {
                 onChanged();
                 return this;
             }
-
-            /**
-             * <code>string code = 1;</code>
-             *
-             * @param value The bytes for code to set.
-             * @return This builder for chaining.
-             */
-            public Builder setCodeBytes(
-                    com.google.protobuf.ByteString value) {
-                if (value == null) {
-                    throw new NullPointerException();
-                }
-                checkByteStringIsUtf8(value);
-                code_ = value;
-                bitField0_ |= 0x00000001;
-                onChanged();
-                return this;
-            }
-
-            private boolean success_;
 
             /**
              * <code>bool success = 2;</code>
@@ -742,8 +815,6 @@ public final class RpcResult {
                 return this;
             }
 
-            private Object message_ = "";
-
             /**
              * <code>string message = 3;</code>
              *
@@ -760,6 +831,23 @@ public final class RpcResult {
                 } else {
                     return (String) ref;
                 }
+            }
+
+            /**
+             * <code>string message = 3;</code>
+             *
+             * @param value The message to set.
+             * @return This builder for chaining.
+             */
+            public Builder setMessage(
+                    String value) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                message_ = value;
+                bitField0_ |= 0x00000004;
+                onChanged();
+                return this;
             }
 
             /**
@@ -784,14 +872,15 @@ public final class RpcResult {
             /**
              * <code>string message = 3;</code>
              *
-             * @param value The message to set.
+             * @param value The bytes for message to set.
              * @return This builder for chaining.
              */
-            public Builder setMessage(
-                    String value) {
+            public Builder setMessageBytes(
+                    com.google.protobuf.ByteString value) {
                 if (value == null) {
                     throw new NullPointerException();
                 }
+                checkByteStringIsUtf8(value);
                 message_ = value;
                 bitField0_ |= 0x00000004;
                 onChanged();
@@ -809,26 +898,6 @@ public final class RpcResult {
                 onChanged();
                 return this;
             }
-
-            /**
-             * <code>string message = 3;</code>
-             *
-             * @param value The bytes for message to set.
-             * @return This builder for chaining.
-             */
-            public Builder setMessageBytes(
-                    com.google.protobuf.ByteString value) {
-                if (value == null) {
-                    throw new NullPointerException();
-                }
-                checkByteStringIsUtf8(value);
-                message_ = value;
-                bitField0_ |= 0x00000004;
-                onChanged();
-                return this;
-            }
-
-            private com.google.protobuf.ByteString data_ = com.google.protobuf.ByteString.EMPTY;
 
             /**
              * <code>bytes data = 4;</code>
@@ -871,87 +940,6 @@ public final class RpcResult {
             // @@protoc_insertion_point(builder_scope:Result)
         }
 
-        // @@protoc_insertion_point(class_scope:Result)
-        private static final Result DEFAULT_INSTANCE;
-
-        static {
-            DEFAULT_INSTANCE = new Result();
-        }
-
-        public static Result getDefaultInstance() {
-            return DEFAULT_INSTANCE;
-        }
-
-        private static final com.google.protobuf.Parser<Result>
-                PARSER = new com.google.protobuf.AbstractParser<Result>() {
-            @Override
-            public Result parsePartialFrom(
-                    com.google.protobuf.CodedInputStream input,
-                    com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-                    throws com.google.protobuf.InvalidProtocolBufferException {
-                Builder builder = newBuilder();
-                try {
-                    builder.mergeFrom(input, extensionRegistry);
-                } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-                    throw e.setUnfinishedMessage(builder.buildPartial());
-                } catch (com.google.protobuf.UninitializedMessageException e) {
-                    throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
-                } catch (java.io.IOException e) {
-                    throw new com.google.protobuf.InvalidProtocolBufferException(e)
-                            .setUnfinishedMessage(builder.buildPartial());
-                }
-                return builder.buildPartial();
-            }
-        };
-
-        public static com.google.protobuf.Parser<Result> parser() {
-            return PARSER;
-        }
-
-        @Override
-        public com.google.protobuf.Parser<Result> getParserForType() {
-            return PARSER;
-        }
-
-        @Override
-        public Result getDefaultInstanceForType() {
-            return DEFAULT_INSTANCE;
-        }
-
-    }
-
-    private static final com.google.protobuf.Descriptors.Descriptor
-            internal_static_Result_descriptor;
-    private static final
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-            internal_static_Result_fieldAccessorTable;
-
-    public static com.google.protobuf.Descriptors.FileDescriptor
-    getDescriptor() {
-        return descriptor;
-    }
-
-    private static com.google.protobuf.Descriptors.FileDescriptor
-            descriptor;
-
-    static {
-        String[] descriptorData = {
-                "\n\017RpcResult.proto\"F\n\006Result\022\014\n\004code\030\001 \001(" +
-                        "\t\022\017\n\007success\030\002 \001(\010\022\017\n\007message\030\003 \001(\t\022\014\n\004d" +
-                        "ata\030\004 \001(\014B$\n\027com.skiff.protobuf.coreB\tRp" +
-                        "cResultb\006proto3"
-        };
-        descriptor = com.google.protobuf.Descriptors.FileDescriptor
-                .internalBuildGeneratedFileFrom(descriptorData,
-                        new com.google.protobuf.Descriptors.FileDescriptor[]{
-                        });
-        internal_static_Result_descriptor =
-                getDescriptor().getMessageTypes().get(0);
-        internal_static_Result_fieldAccessorTable = new
-                com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-                internal_static_Result_descriptor,
-                new String[]{"Code", "Success", "Message", "Data",});
-        descriptor.resolveAllFeaturesImmutable();
     }
 
     // @@protoc_insertion_point(outer_class_scope)
