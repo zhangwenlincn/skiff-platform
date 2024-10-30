@@ -7,6 +7,7 @@ import lombok.Data;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 @Data
 public class Results implements Serializable {
@@ -50,7 +51,7 @@ public class Results implements Serializable {
     //----------------------------------------------------------------------------------
 
     public static BaseResult baseResult(String code, String message) {
-        return new BaseResult(false, code, message);
+        return new BaseResult(Objects.equals(BaseCodeEnum.SUCCESS.getCode(), code), code, message);
     }
 
     public static BaseResult baseResult(String message) {
