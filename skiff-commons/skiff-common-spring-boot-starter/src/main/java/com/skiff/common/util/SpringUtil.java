@@ -17,6 +17,14 @@ public class SpringUtil implements BeanFactoryPostProcessor, ApplicationContextA
 
     private static ApplicationContext applicationContext;
 
+    public static <T> T getBean(String name) throws BeansException {
+        return (T) applicationContext.getBean(name);
+    }
+
+    public static <T> T getBean(Class<T> clz) throws BeansException {
+        return (T) applicationContext.getBean(clz);
+    }
+
     @Override
     public void postProcessBeanFactory(@Nullable ConfigurableListableBeanFactory beanFactory) throws BeansException {
         SpringUtil.beanFactory = beanFactory;
@@ -25,13 +33,5 @@ public class SpringUtil implements BeanFactoryPostProcessor, ApplicationContextA
     @Override
     public void setApplicationContext(@Nullable ApplicationContext applicationContext) throws BeansException {
         SpringUtil.applicationContext = applicationContext;
-    }
-
-    public static <T> T getBean(String name) throws BeansException {
-        return (T) applicationContext.getBean(name);
-    }
-
-    public static <T> T getBean(Class<T> clz) throws BeansException {
-        return (T) applicationContext.getBean(clz);
     }
 }
