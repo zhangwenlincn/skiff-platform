@@ -5,10 +5,12 @@ import com.skiff.gateway.app.filter.EncryptResponseBodyGatewayFilter;
 import com.skiff.gateway.app.properties.DecryptionEncryptionProperties;
 import com.skiff.gateway.app.service.KeySecretService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@EnableConfigurationProperties(DecryptionEncryptionProperties.class)
 public class GatewayConfiguration {
 
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(GatewayConfiguration.class);
@@ -24,12 +26,6 @@ public class GatewayConfiguration {
     public EncryptResponseBodyGatewayFilter encryptResponseBodyGatewayFilter() {
         return new EncryptResponseBodyGatewayFilter();
     }
-
-    @Bean
-    public DecryptionEncryptionProperties decryptionEncryptionProperties() {
-        return new DecryptionEncryptionProperties();
-    }
-
 
     @Bean
     public KeySecretService testKeySecretService() {

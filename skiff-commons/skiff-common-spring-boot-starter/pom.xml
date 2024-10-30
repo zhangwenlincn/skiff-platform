@@ -30,5 +30,9 @@
             <groupId>com.skiff.common.core</groupId>
             <artifactId>skiff-common-core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
     </dependencies>
 </project>

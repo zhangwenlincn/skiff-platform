@@ -13,9 +13,10 @@
     <artifactId>skiff-registry</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>skiff-registry-api</module>
-        <module>skiff-registry-app</module>
-        <module>skiff-registry-sdk</module>
+        <module>skiff-registry-server</module>
+        <module>skiff-registry-client</module>
+        <module>skiff-registry-server-spring-boot-starter</module>
+        <module>skiff-registry-client-sping-boot-starter</module>
     </modules>
 
     <properties>

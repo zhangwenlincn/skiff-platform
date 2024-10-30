@@ -138,21 +138,23 @@
             </dependency>
 
             <dependency>
-                <groupId>com.skiff.registry.api</groupId>
-                <artifactId>skiff-registry-api</artifactId>
-                <version>${skiff.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>com.skiff.common</groupId>
                 <artifactId>skiff-common-spring-boot-starter</artifactId>
                 <version>${skiff.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.skiff.registry.sdk</groupId>
-                <artifactId>skiff-registry-sdk</artifactId>
+                <groupId>com.skiff.registry.server</groupId>
+                <artifactId>skiff-registry-server-spring-boot-starter</artifactId>
                 <version>${skiff.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.skiff.registry.client</groupId>
+                <artifactId>skiff-registry-client-sping-boot-starter</artifactId>
+                <version>${skiff.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

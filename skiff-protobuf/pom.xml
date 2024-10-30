@@ -11,10 +11,7 @@
 
     <groupId>com.skiff.protobuf</groupId>
     <artifactId>skiff-protobuf</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>skiff-protobuf-core</module>
-    </modules>
+    <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
