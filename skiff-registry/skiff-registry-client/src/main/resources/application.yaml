@@ -4,6 +4,12 @@ spring:
   application:
     name: registry-client
 
+
+skiff:
+  registry:
+    client:
+      service-name: ${spring.application.name}
+
 logging:
   level:
     com.skiff: debug

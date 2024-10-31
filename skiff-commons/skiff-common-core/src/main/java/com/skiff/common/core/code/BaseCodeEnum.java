@@ -8,6 +8,7 @@ public enum BaseCodeEnum implements Code {
     SUCCESS("10000", "操作成功"),
     ERROR("10001", "操作失败"),
     EXCEPTION_FAIL("10002", "操作异常"),
+    NET_IP_FAIL("10003", "Net IP Fail"),
 
     AES_DECRYPT_FAIL("10010", "解密失败"),
     AES_ENCRYPT_FAIL("10011", "加密失败"),

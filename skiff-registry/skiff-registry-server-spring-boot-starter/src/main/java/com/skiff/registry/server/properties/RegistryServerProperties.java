@@ -8,4 +8,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class RegistryServerProperties {
 
     private Integer port = 50050;
+
+    private Registered registered = Registered.def;
+
+    public enum Registered {
+        def;
+    }
 }
