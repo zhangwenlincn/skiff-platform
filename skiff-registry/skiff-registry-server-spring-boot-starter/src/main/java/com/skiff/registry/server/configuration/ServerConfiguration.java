@@ -25,11 +25,9 @@ public class ServerConfiguration {
         this.registryServerProperties = registryServerProperties;
     }
 
-    @Bean
+    @Bean(initMethod = "start")
     public RegistryServer registryServer() {
-        RegistryServer registryServer = new RegistryServer(registryServerProperties.getPort());
-        registryServer.start();
-        return registryServer;
+        return new RegistryServer(registryServerProperties.getPort());
     }
 
     @Bean

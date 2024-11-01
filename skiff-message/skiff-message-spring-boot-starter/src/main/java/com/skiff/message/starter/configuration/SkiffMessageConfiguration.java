@@ -37,7 +37,7 @@ public class SkiffMessageConfiguration implements ApplicationContextAware {
         this.applicationContext = applicationContext;
     }
 
-    @Bean
+    @Bean(initMethod = "schedule")
     public MessageActuatorTask defaultMessageActuatorTask() {
         SpringMessageActuatorRegister register = new SpringMessageActuatorRegister(applicationContext);
         Map<String, Object> startMap = applicationContext.getBeansWithAnnotation(SpringBootApplication.class);
@@ -53,9 +53,7 @@ public class SkiffMessageConfiguration implements ApplicationContextAware {
         List<String> actualPackages = packages.stream().distinct().collect(Collectors.toList());
         register.register(actualPackages.toArray(new String[0]));
         logger.info("Message actuator register completed. register packages: {}", actualPackages);
-        MessageActuatorTask task = new DefaultMessageActuatorTask(messageStorageService);
-        task.schedule();
-        return task;
+        return new DefaultMessageActuatorTask(messageStorageService);
     }
 
 

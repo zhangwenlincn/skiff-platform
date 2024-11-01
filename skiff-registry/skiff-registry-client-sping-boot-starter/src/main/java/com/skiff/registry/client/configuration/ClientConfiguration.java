@@ -17,11 +17,9 @@ public class ClientConfiguration {
         this.registryClientProperties = registryClientProperties;
     }
 
-    @Bean
+    @Bean(initMethod = "start")
     public CallbackServer callbackServer() {
-        CallbackServer callbackServer = new CallbackServer(registryClientProperties.getClient().getPort());
-        callbackServer.start();
-        return callbackServer;
+        return new CallbackServer(registryClientProperties.getClient().getPort());
     }
 
 }

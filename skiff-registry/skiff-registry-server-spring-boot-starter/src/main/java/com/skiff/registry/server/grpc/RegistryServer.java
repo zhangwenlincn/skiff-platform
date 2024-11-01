@@ -15,7 +15,6 @@ public class RegistryServer {
     }
 
     public void start() {
-
         new Thread(() -> {
             io.grpc.Server server = ServerBuilder.forPort(port)
                     .addService(SpringUtil.getBean(GrpcRegistryServiceImpl.class))
