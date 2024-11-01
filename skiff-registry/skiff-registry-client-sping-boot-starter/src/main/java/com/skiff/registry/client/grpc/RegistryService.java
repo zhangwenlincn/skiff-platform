@@ -14,19 +14,17 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
-
 @Component
 public class RegistryService implements InitializingBean {
 
 
     private static final Logger log = LoggerFactory.getLogger(RegistryService.class);
     private final RegistryClientProperties registryClientProperties;
+    private RpcRegistry.RegistryRequest request;
 
     public RegistryService(RegistryClientProperties registryClientProperties) {
         this.registryClientProperties = registryClientProperties;
     }
-
-    private RpcRegistry.RegistryRequest request;
 
     public RpcResult.Result registry(RpcRegistry.RegistryRequest registryRequest) {
         ManagedChannel channel = ManagedChannelBuilder.forAddress(registryClientProperties.getRegistry().getIp(), registryClientProperties.getRegistry().getPort())
@@ -44,20 +42,22 @@ public class RegistryService implements InitializingBean {
     }
 
     private void autoRegistry() {
-        log.info("auto register start serviceName:{},ip:{},port:{}", registryClientProperties.getServiceName(), registryClientProperties.getIp(), registryClientProperties.getPort());
+        log.info("auto register start serviceName:{},ip:{},port:{}", registryClientProperties.getClient().getServiceName()
+                , registryClientProperties.getClient().getIp()
+                , registryClientProperties.getClient().getPort());
         Thread thread = new Thread(() -> {
             while (true) {
-               try {
-                   RpcResult.Result result = registry(getRequest());
-                   log.debug("auto register result：{}", result.getMessage());
-               }catch (Exception e){
-                   log.error("auto register error", e);
-               }finally {
-                   try {
-                       TimeUnit.SECONDS.sleep(5);
-                   } catch (InterruptedException ignored) {
-                   }
-               }
+                try {
+                    RpcResult.Result result = registry(getRequest());
+                    log.debug("auto register result：{}", result.getMessage());
+                } catch (Exception e) {
+                    log.error("auto register error", e);
+                } finally {
+                    try {
+                        TimeUnit.SECONDS.sleep(5);
+                    } catch (InterruptedException ignored) {
+                    }
+                }
             }
         });
         thread.setDaemon(true);
@@ -67,9 +67,9 @@ public class RegistryService implements InitializingBean {
     private RpcRegistry.RegistryRequest getRequest() {
         return Optional.ofNullable(request).orElseGet(() -> {
             request = RpcRegistry.RegistryRequest.newBuilder()
-                    .setServiceName(registryClientProperties.getServiceName())
-                    .setIp(registryClientProperties.getIp())
-                    .setPort(registryClientProperties.getPort())
+                    .setServiceName(registryClientProperties.getClient().getServiceName())
+                    .setIp(registryClientProperties.getClient().getIp())
+                    .setPort(registryClientProperties.getClient().getPort())
                     .build();
             return request;
         });

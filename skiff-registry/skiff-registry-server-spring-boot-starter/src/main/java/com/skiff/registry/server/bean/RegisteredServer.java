@@ -14,6 +14,14 @@ public class RegisteredServer implements Serializable {
 
     @Serial
     private final static long serialVersionUID = 1L;
+    /**
+     * 服务名称
+     */
+    private String serviceName;
+    /**
+     * 服务地址 ip:port
+     */
+    private Set<String> address;
 
     public RegisteredServer() {
 
@@ -23,14 +31,4 @@ public class RegisteredServer implements Serializable {
         this.serviceName = serviceName;
         this.address = address;
     }
-
-    /**
-     * 服务名称
-     */
-    private String serviceName;
-
-    /**
-     * 服务地址 ip:port
-     */
-    private Set<String> address;
 }

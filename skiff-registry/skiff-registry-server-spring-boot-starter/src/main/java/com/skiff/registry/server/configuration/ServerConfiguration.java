@@ -34,7 +34,7 @@ public class ServerConfiguration {
 
     @Bean
     @ConditionalOnProperty(prefix = "skiff.registry.server", name = "registered", havingValue = "def", matchIfMissing = true)
-    public RegisteredService registeredService(){
+    public RegisteredService registeredService() {
         log.info("skiff.registry.server.registered = def");
         return new DefaultRegisteredServiceImpl();
     }

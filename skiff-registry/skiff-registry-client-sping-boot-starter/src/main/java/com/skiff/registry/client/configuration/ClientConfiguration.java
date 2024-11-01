@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan(basePackages = "com.skiff.registry.client")
 @EnableConfigurationProperties(RegistryClientProperties.class)
 public class ClientConfiguration {
-
     private final RegistryClientProperties registryClientProperties;
 
     public ClientConfiguration(RegistryClientProperties registryClientProperties) {
@@ -20,8 +19,9 @@ public class ClientConfiguration {
 
     @Bean
     public CallbackServer callbackServer() {
-        CallbackServer callbackServer = new CallbackServer(registryClientProperties.getPort());
+        CallbackServer callbackServer = new CallbackServer(registryClientProperties.getClient().getPort());
         callbackServer.start();
         return callbackServer;
     }
+
 }

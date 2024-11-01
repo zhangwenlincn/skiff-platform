@@ -15,6 +15,7 @@ public interface RegisteredService {
      * @return 获取注册的服务
      */
     List<RegisteredServer> getRegistered();
+
     /**
      * 获取指定的注册的服务
      *
