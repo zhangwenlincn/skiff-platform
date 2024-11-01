@@ -28,11 +28,17 @@ public class RegistryClientProperties {
     private Registry registry;
 
     public RegistryClientProperties.client getClient() {
-        return Optional.ofNullable(client).orElse(new client());
+        return Optional.ofNullable(client).orElseGet(() -> {
+            client = new client();
+            return client;
+        });
     }
 
     public Registry getRegistry() {
-        return Optional.ofNullable(registry).orElse(new Registry());
+        return Optional.ofNullable(registry).orElseGet(() -> {
+            registry = new Registry();
+            return registry;
+        });
     }
 
     @Data
