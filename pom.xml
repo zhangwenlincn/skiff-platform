@@ -36,6 +36,7 @@
         <commons.lang3.version>3.14.0</commons.lang3.version>
         <redission.spring.version>3.31.0</redission.spring.version>
         <modelmapper.version>3.2.1</modelmapper.version>
+        <pgsql.version>42.7.4</pgsql.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -105,6 +106,12 @@
                 <groupId>org.redisson</groupId>
                 <artifactId>redisson-spring-boot-starter</artifactId>
                 <version>${redission.spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${pgsql.version}</version>
             </dependency>
 
             <dependency>

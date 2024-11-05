@@ -18,6 +18,6 @@ public class RegistryServerProperties {
     }
 
     public enum Registered {
-        def;
+        def, jdbc, custom;
     }
 }

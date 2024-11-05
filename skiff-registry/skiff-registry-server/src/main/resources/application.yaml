@@ -3,6 +3,17 @@ server:
 spring:
   application:
     name: registry-server
+  datasource:
+    url: jdbc:postgresql://skiff.com:5432/skiff
+    username: dev
+    password: dev@skiff
+    driver-class-name: org.postgresql.Driver
+
+
+skiff:
+  registry:
+    server:
+      registered: jdbc
 
 logging:
   level:
