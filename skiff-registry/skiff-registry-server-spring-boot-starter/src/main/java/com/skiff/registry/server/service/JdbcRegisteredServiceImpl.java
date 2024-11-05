@@ -9,7 +9,6 @@ import com.skiff.registry.server.jdbc.RegistryServerInfoRowMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.util.CollectionUtils;
 
 import java.sql.Connection;
@@ -21,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class JdbcRegisteredServiceImpl implements RegisteredService {
@@ -34,8 +34,9 @@ public class JdbcRegisteredServiceImpl implements RegisteredService {
         DatabaseMetaData data = Optional.ofNullable(jdbcTemplate.execute(Connection::getMetaData)).orElseThrow(() -> new SkiffException("get db info error"));
         try {
             DataDialectEnum dataDialectEnum = DataDialectEnum.valueOf(data.getDatabaseProductName());
-            Map<String, Object> cntMap = jdbcTemplate.queryForMap(dataDialectEnum.getSql());
-            if ((Long) cntMap.get("count") == 0) {
+            String schema = jdbcTemplate.queryForObject(dataDialectEnum.getSchema(), String.class);
+            Map<String, Object> cntMap = jdbcTemplate.queryForMap(dataDialectEnum.getSql(), schema);
+            if ((Long) cntMap.get("cnt") == 0) {
                 log.info("jdbc init db");
                 jdbcTemplate.execute(dataDialectEnum.getInitSql());
             }
@@ -58,8 +59,25 @@ public class JdbcRegisteredServiceImpl implements RegisteredService {
                     , request.getPort()
                     , LocalDateTime.now());
         }
+    }
 
-
+    public void expired() {
+        Thread thread = new Thread(() -> {
+            while (true) {
+                try {
+                    removeExpired();
+                } catch (Exception e) {
+                    log.error("remove expired error", e);
+                } finally {
+                    try {
+                        TimeUnit.SECONDS.sleep(1);
+                    } catch (InterruptedException ignored) {
+                    }
+                }
+            }
+        });
+        thread.setDaemon(true);
+        thread.start();
     }
 
     @Override
@@ -77,6 +95,13 @@ public class JdbcRegisteredServiceImpl implements RegisteredService {
     public RegisteredServer getRegistered(String serviceName) {
         List<RegistryServerInfo> dbList = Optional.ofNullable(getByName(serviceName)).orElseThrow(() -> new SkiffException("service not exits"));
         return new RegisteredServer(serviceName, dbList.stream().map(x -> x.getIp() + ":" + x.getPort()).collect(Collectors.toSet()));
+    }
+
+    public void removeExpired() {
+        int cnt = jdbcTemplate.update("delete from registry_server_info where status = 1 and register_time < ?", LocalDateTime.now().plusSeconds(-8));
+        if (cnt > 0) {
+            log.info("remove expired {}", cnt);
+        }
     }
 
     public List<RegistryServerInfo> getByName(String name) {

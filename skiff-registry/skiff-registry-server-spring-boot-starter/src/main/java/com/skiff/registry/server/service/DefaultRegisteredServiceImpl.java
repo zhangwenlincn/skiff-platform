@@ -38,6 +38,11 @@ public class DefaultRegisteredServiceImpl implements RegisteredService {
         return null;
     }
 
+    @Override
+    public void expired() {
+
+    }
+
     private RegisteredServer getRegistered(RpcRegistry.RegistryRequest request) {
         RegisteredServer registeredServer = new RegisteredServer();
         registeredServer.setServiceName(request.getServiceName());

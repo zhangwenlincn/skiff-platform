@@ -39,7 +39,7 @@ public class ServerConfiguration {
         return new DefaultRegisteredServiceImpl();
     }
 
-    @Bean
+    @Bean(initMethod = "expired")
     @ConditionalOnProperty(prefix = "skiff.registry.server", name = "registered", havingValue = "jdbc")
     public RegisteredService registeredService(JdbcTemplate jdbcTemplate) {
         log.info("skiff.registry.server.registered = jdbc");

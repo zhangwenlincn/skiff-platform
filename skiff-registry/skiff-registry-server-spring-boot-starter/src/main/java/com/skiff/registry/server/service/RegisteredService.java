@@ -7,6 +7,11 @@ import com.skiff.registry.server.bean.RegisteredServer;
 import java.util.List;
 
 public interface RegisteredService {
+    /**
+     * 注册服务
+     *
+     * @param request 注册服务
+     */
     void registry(RpcRegistry.RegistryRequest request);
 
     /**
@@ -23,4 +28,8 @@ public interface RegisteredService {
      */
     RegisteredServer getRegistered(String serviceName);
 
+    /**
+     * 过期的服务
+     */
+    void expired();
 }

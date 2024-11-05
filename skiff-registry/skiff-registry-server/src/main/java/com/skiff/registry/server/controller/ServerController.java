@@ -30,7 +30,7 @@ public class ServerController {
     }
 
     @GetMapping(value = "/callback")
-    public BaseResult callback(@RequestParam(value = "serviceName") String serviceName) {
+        public BaseResult callback(@RequestParam(value = "serviceName") String serviceName) {
         //RegisteredServer registered = registeredService.getRegistered(serviceName);
         callbackService.callback(serviceName, "test", "test");
         return Results.baseResult(true);
