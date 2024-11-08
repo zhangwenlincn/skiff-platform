@@ -14,7 +14,10 @@ public class RegistryServerProperties {
     private Registered registered;
 
     public Registered getRegistered() {
-        return Optional.ofNullable(registered).orElse(Registered.def);
+        return Optional.ofNullable(registered).orElseGet(() -> {
+            registered = Registered.def;
+            return registered;
+        });
     }
 
     public enum Registered {
