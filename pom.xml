@@ -10,11 +10,11 @@
     <packaging>pom</packaging>
     <modules>
         <module>skiff-commons</module>
-        <module>skiff-registry</module>
-        <module>skiff-message</module>
-        <module>skiff-gateway</module>
-        <module>skiff-protobuf</module>
-        <module>skiff-admin</module>
+<!--        <module>skiff-registry</module>-->
+<!--        <module>skiff-message</module>-->
+<!--        <module>skiff-gateway</module>-->
+<!--        <module>skiff-protobuf</module>-->
+<!--        <module>skiff-admin</module>-->
     </modules>
 
     <properties>
