@@ -42,6 +42,8 @@ public class JdbcRegisteredServiceImpl implements RegisteredService {
             }
         } catch (SQLException e) {
             throw new SkiffException("get database product name err");
+        } catch (IllegalArgumentException e) {
+            log.warn("not support db please manual database and table creation");
         }
     }
 
@@ -60,6 +62,7 @@ public class JdbcRegisteredServiceImpl implements RegisteredService {
                     , LocalDateTime.now());
         }
     }
+
     @Override
     public void expired() {
         Thread thread = new Thread(() -> {

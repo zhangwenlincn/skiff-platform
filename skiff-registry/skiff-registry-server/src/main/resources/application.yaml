@@ -4,14 +4,14 @@ spring:
   application:
     name: registry-server
   datasource:
-    url: jdbc:mysql://skiff.com:3306/skiff?useSSL=false&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true
-    username: dev
-    password: dev@skiff
-    driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:postgresql://skiff.com:5432/skiff
+#    url: jdbc:mysql://skiff.com:3306/skiff?useSSL=false&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true
 #    username: dev
 #    password: dev@skiff
-#    driver-class-name: org.postgresql.Driver
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:postgresql://skiff.com:5432/skiff
+    username: dev
+    password: dev@skiff
+    driver-class-name: org.postgresql.Driver
 
 
 skiff:
