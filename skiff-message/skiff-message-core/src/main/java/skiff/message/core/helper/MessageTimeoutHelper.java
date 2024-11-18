@@ -50,7 +50,7 @@ public class MessageTimeoutHelper {
         for (String key : keys) {
             if (executes.get(key).getTimestamp() + 1000 * 10 < System.currentTimeMillis()
                     && (executes.get(key).getTimeout().isCancelled() || executes.get(key).getTimeout().isExpired())) {
-                logger.debug("Removing expired cancelled timeout 1000 * 10  for key: " + key);
+                logger.debug("Removing expired cancelled timeout 1000 * 10  for key: {}", key);
                 executes.remove(key);
             }
         }
