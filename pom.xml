@@ -141,32 +141,8 @@
             </dependency>
 
             <dependency>
-                <groupId>com.skiff.common.nacos</groupId>
-                <artifactId>skiff-common-nacos-spring-boot-starter</artifactId>
-                <version>${skiff.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.skiff.protobuf</groupId>
-                <artifactId>skiff-protobuf</artifactId>
-                <version>${skiff.version}</version>
-            </dependency>
-
-            <dependency>
                 <groupId>com.skiff.common</groupId>
                 <artifactId>skiff-common-spring-boot-starter</artifactId>
-                <version>${skiff.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.skiff.registry.server</groupId>
-                <artifactId>skiff-registry-server-spring-boot-starter</artifactId>
-                <version>${skiff.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.skiff.registry.client</groupId>
-                <artifactId>skiff-registry-client-sping-boot-starter</artifactId>
                 <version>${skiff.version}</version>
             </dependency>
 
@@ -222,5 +198,17 @@
         </pluginManagement>
     </build>
 
+    <repositories>
+        <repository>
+            <id>zhangwenlin</id>
+            <url>https://packages.aliyun.com/63154d07cb9d006848799d05/maven/zhangwenlin</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
 </project>

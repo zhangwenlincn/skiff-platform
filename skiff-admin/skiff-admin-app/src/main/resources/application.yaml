@@ -1,9 +1,0 @@
-server:
-  port: 8086
-spring:
-  application:
-    name: admin
-
-logging:
-  level:
-    com.skiff: debug

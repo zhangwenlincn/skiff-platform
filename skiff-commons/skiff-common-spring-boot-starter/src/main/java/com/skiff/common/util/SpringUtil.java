@@ -5,9 +5,8 @@ import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.lang.Nullable;
 
-@SuppressWarnings("unchecked")
+@SuppressWarnings("all")
 public class SpringUtil implements BeanFactoryPostProcessor, ApplicationContextAware {
 
     /**
@@ -26,12 +25,12 @@ public class SpringUtil implements BeanFactoryPostProcessor, ApplicationContextA
     }
 
     @Override
-    public void postProcessBeanFactory(@Nullable ConfigurableListableBeanFactory beanFactory) throws BeansException {
+    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
         SpringUtil.beanFactory = beanFactory;
     }
 
     @Override
-    public void setApplicationContext(@Nullable ApplicationContext applicationContext) throws BeansException {
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         SpringUtil.applicationContext = applicationContext;
     }
 }
