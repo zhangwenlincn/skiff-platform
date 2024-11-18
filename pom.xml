@@ -10,15 +10,9 @@
     <packaging>pom</packaging>
     <modules>
         <module>skiff-commons</module>
-<!--        <module>skiff-registry</module>-->
-        <module>skiff-message</module>
-<!--        <module>skiff-gateway</module>-->
-<!--        <module>skiff-protobuf</module>-->
-<!--        <module>skiff-admin</module>-->
     </modules>
 
     <properties>
-        <os.detected.classifier>windows-x86_64</os.detected.classifier>
         <skiff.version>1.0</skiff.version>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
