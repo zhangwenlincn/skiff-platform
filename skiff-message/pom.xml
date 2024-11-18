@@ -16,7 +16,7 @@
     <modules>
         <module>skiff-message-core</module>
         <module>skiff-message-spring-boot-starter</module>
-        <module>skiff-message-app</module>
+<!--        <module>skiff-message-app</module>-->
     </modules>
 
     <properties>
