@@ -186,17 +186,4 @@
             </plugins>
         </pluginManagement>
     </build>
-
-    <repositories>
-        <repository>
-            <id>zhangwenlin</id>
-            <url>https://packages.aliyun.com/63154d07cb9d006848799d05/maven/zhangwenlin</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
 </project>
