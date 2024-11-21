@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.skiff.platform</groupId>
         <artifactId>skiff-platform</artifactId>
-        <version>1.0</version>
+        <version>1.1</version>
     </parent>
 
     <groupId>com.skiff.common</groupId>

@@ -6,14 +6,14 @@
 
     <groupId>com.skiff.platform</groupId>
     <artifactId>skiff-platform</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
     <packaging>pom</packaging>
     <modules>
         <module>skiff-commons</module>
     </modules>
 
     <properties>
-        <skiff.version>1.0</skiff.version>
+        <skiff.version>1.1</skiff.version>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <mavem.compiler.plugin.version>3.13.0</mavem.compiler.plugin.version>
@@ -126,18 +126,6 @@
             <dependency>
                 <groupId>com.skiff.common.core</groupId>
                 <artifactId>skiff-common-core</artifactId>
-                <version>${skiff.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.skiff.message.core</groupId>
-                <artifactId>skiff-message-core</artifactId>
-                <version>${skiff.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.skiff.message.starter</groupId>
-                <artifactId>skiff-message-spring-boot-starter</artifactId>
                 <version>${skiff.version}</version>
             </dependency>
 
