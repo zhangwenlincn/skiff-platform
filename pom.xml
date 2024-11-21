@@ -33,6 +33,7 @@
         <modelmapper.version>3.2.1</modelmapper.version>
         <pgsql.version>42.7.4</pgsql.version>
         <mysql.version>8.0.33</mysql.version>
+        <ttl.version>2.14.4</ttl.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -84,6 +85,12 @@
                 <version>${netty.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>transmittable-thread-local</artifactId>
+                <version>${ttl.version}</version>
             </dependency>
 
             <dependency>
@@ -204,5 +211,4 @@
             </snapshots>
         </repository>
     </repositories>
-
 </project>

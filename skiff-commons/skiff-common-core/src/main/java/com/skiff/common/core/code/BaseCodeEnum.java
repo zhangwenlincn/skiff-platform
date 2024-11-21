@@ -1,35 +1,41 @@
 package com.skiff.common.core.code;
 
+import com.skiff.common.core.util.ThreadLocalUtil;
 import lombok.Getter;
+
+import java.util.Optional;
 
 @Getter
 public enum BaseCodeEnum implements Code {
 
-    SUCCESS("10000", "操作成功"),
-    ERROR("10001", "操作失败"),
-    EXCEPTION_FAIL("10002", "操作异常"),
-    NET_IP_FAIL("10003", "Net IP Fail"),
-
-    AES_DECRYPT_FAIL("10010", "解密失败"),
-    AES_ENCRYPT_FAIL("10011", "加密失败"),
-    ACTUATOR_FAIL("10034", "执行异常"),
-
-    APP_NOT_FOUND("10021", "应用不存在"),
-    PARAMETER_FAIL("10022", "参数校验未通过"),
-
-    SERIALIZATION_FAIL("10005", "序列化错误"),
-    DESERIALIZATION_FAIL("10006", "反序列化错误"),
-    URI_PATH_NOT_FOUND("10007", "URI路径不存在"),
-    REQUEST_METHOD_NOT_SUPPORTED("10008", "%s method not supported, only support [%s]"),
-    MESSAGE_NOT_READABLE("10009", "required request body is missing"),
+    SUCCESS("10000", "操作成功", "success"),
+    ERROR("10001", "操作失败", "error"),
+    EXCEPTION_FAIL("10002", "操作异常", "exception"),
+    DESERIALIZATION_FAIL("10003", "反序列化错误", "deserialization fail"),
+    PARAMETER_FAIL("10004", "参数校验未通过", "parameter fail"),
+    SERIALIZATION_FAIL("10005", "序列化错误", "serialization fail"),
     ;
-
+    /**
+     * 状态码
+     */
     private final String code;
 
-    private final String message;
+    private final String zh;
 
-    BaseCodeEnum(String code, String message) {
+    private final String en;
+
+    @Override
+    public String getMessage() {
+        LanguageEnum languageEnum = Optional.ofNullable(ThreadLocalUtil.getLanguage()).orElse(LanguageEnum.zh_CN);
+        return switch (languageEnum) {
+            case zh_CN -> zh;
+            case en_US -> en;
+        };
+    }
+
+    BaseCodeEnum(String code, String zh, String en) {
         this.code = code;
-        this.message = message;
+        this.zh = zh;
+        this.en = en;
     }
 }
