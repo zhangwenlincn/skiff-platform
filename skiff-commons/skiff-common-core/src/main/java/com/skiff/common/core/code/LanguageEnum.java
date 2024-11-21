@@ -7,9 +7,9 @@ public enum LanguageEnum {
     zh_CN("中文简体"),
     en_US("English");
 
-    private final String name;
+    private final String desc;
 
-    LanguageEnum(String name) {
-        this.name = name;
+    LanguageEnum(String desc) {
+        this.desc = desc;
     }
 }
