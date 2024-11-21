@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>skiff-commons</module>
+        <module>skiff-message</module>
     </modules>
 
     <properties>
@@ -132,6 +133,18 @@
             <dependency>
                 <groupId>com.skiff.common</groupId>
                 <artifactId>skiff-common-spring-boot-starter</artifactId>
+                <version>${skiff.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.skiff.message.core</groupId>
+                <artifactId>skiff-message-core</artifactId>
+                <version>${skiff.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.skiff.message</groupId>
+                <artifactId>skiff-message-spring-boot-starter</artifactId>
                 <version>${skiff.version}</version>
             </dependency>
 
